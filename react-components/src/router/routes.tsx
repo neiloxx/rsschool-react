@@ -1,10 +1,10 @@
+import BaseLayout from 'pages/BaseLayout';
 import pages from 'pages/index';
-import App from 'App';
 
 export default [
   {
     path: '/',
-    element: <App />,
+    element: <BaseLayout />,
     children: [
       {
         path: '',
