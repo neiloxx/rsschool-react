@@ -1,1 +1,7 @@
-**/.idea/**
+## Webstorm
+
+.idea
+
+## Develop
+
+node_modules
