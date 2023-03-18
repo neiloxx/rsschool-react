@@ -1,12 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import NavList from 'components/NavList/NavList';
 import React from 'react';
+
+import './Header.scss';
 
 export default class Header extends React.Component {
   render() {
     return (
       <header className={'header'}>
-        <NavLink to={'./'}>Home</NavLink>
-        <NavLink to={'./about'}>Home</NavLink>
+        <div className={'header-inner'}>
+          <NavList />
+        </div>
       </header>
     );
   }

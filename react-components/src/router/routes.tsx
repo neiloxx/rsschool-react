@@ -1,4 +1,4 @@
-import BaseLayout from 'pages/BaseLayout';
+import BaseLayout from 'components/Layouts/BaseLayout';
 import pages from 'pages/index';
 
 export default [
