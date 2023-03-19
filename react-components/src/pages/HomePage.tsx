@@ -1,7 +1,13 @@
+import CardsField from 'components/CardsField/CardsField';
 import React from 'react';
 
 export default class HomePage extends React.Component {
   render() {
-    return <h1>Home Page</h1>;
+    return (
+      <>
+        <h1>Home Page</h1>
+        <CardsField />
+      </>
+    );
   }
 }
