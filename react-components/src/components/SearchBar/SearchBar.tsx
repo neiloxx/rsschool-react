@@ -27,6 +27,7 @@ export default class SearchBar extends React.Component {
       <input
         className={'search-bar'}
         placeholder={'Search...'}
+        aria-label={'search-bar'}
         value={this.state.query}
         onChange={this.handleInputChange}
       />
