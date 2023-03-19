@@ -1,0 +1,41 @@
+.main-nfp {
+  max-width: var(--layout-l);
+  width: 100%;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: lighter;
+    color: var(--dark-text-color);
+  }
+
+  &__image {
+    max-width: 30rem;
+    width: 100%;
+    height: 30rem;
+    background: url("../../assets/images/404-error.svg") center center no-repeat;
+  }
+
+  &__link {
+    padding: 1rem;
+    color: var(--error-text-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 0.1rem solid var(--error-text-color);
+
+    &:hover {
+      color: var(--dark-text-color);
+      border-color: var(--dark-text-color);
+    }
+
+    &:active {
+      color: var(--error-text-color);
+      border-color: var(--error-text-color);
+    }
+  }
+}
