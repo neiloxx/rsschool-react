@@ -12,6 +12,10 @@ const NAV_ROUTES = [
     to: '/about',
     title: 'About',
   },
+  {
+    to: '/form',
+    title: 'Form',
+  },
 ];
 
 export default class NavList extends React.Component {

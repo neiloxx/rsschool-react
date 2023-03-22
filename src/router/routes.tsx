@@ -15,6 +15,10 @@ export default [
         path: 'about',
         element: <pages.AboutPage />,
       },
+      {
+        path: '/form',
+        element: <pages.FormPage />,
+      },
     ],
   },
   {
