@@ -11,8 +11,8 @@ describe('CardsField', () => {
   beforeEach(() => render(<CardsField />));
 
   it('should render CardsField', () => {
-    expect(screen.getByText(TEST_CARD.title));
-    expect(screen.getByText(TEST_CARD.pageCount));
-    expect(screen.getByText(TEST_CARD.shortDescription));
+    expect(screen.getByText(TEST_CARD.title)).toBeInTheDocument();
+    expect(screen.getByText(TEST_CARD.pageCount)).toBeInTheDocument();
+    expect(screen.getByText(TEST_CARD.shortDescription)).toBeInTheDocument();
   });
 });
