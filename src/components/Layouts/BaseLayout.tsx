@@ -3,7 +3,7 @@ import React from 'react';
 import Header from 'components/Header/Header';
 import { Outlet } from 'react-router-dom';
 
-import './BaseLayout.scss';
+import 'components/Layouts/BaseLayout.scss';
 
 export default class BaseLayout extends React.Component {
   render() {

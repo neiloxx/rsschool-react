@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './SearchBar.scss';
+import 'components/SearchBar/SearchBar.scss';
 
 const QUERY_KEY = 'query';
 

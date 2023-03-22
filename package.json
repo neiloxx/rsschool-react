@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint -- src",
     "test": "jest",
-    "prepare": "cd .. && husky install react-components/.husky"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

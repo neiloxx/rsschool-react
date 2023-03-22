@@ -2,7 +2,7 @@ import Card from 'components/Card/Card';
 import React from 'react';
 import data from 'api/data.json';
 
-import './CardsField.scss';
+import 'components/CardsField/CardsField.scss';
 
 export default class CardsField extends React.Component {
   render() {

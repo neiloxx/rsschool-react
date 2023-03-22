@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 
-import './NavList.scss';
+import 'components/NavList/NavList.scss';
 
 const NAV_ROUTES = [
   {

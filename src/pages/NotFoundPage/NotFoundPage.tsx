@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './NotFoundPage.scss';
+import 'pages/NotFoundPage/NotFoundPage.scss';
 import { NavLink } from 'react-router-dom';
 
 export default class NotFoundPage extends React.Component {

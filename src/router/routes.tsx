@@ -1,5 +1,5 @@
 import BaseLayout from 'components/Layouts/BaseLayout';
-import pages from 'pages/index';
+import pages from 'pages';
 import { Navigate } from 'react-router-dom';
 
 export default [
