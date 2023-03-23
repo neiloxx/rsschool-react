@@ -6,18 +6,20 @@ import './Card.scss';
 
 export default class Card extends React.Component<CardType> {
   render() {
+    const { title, thumbnailUrl, pageCount, authors, shortDescription } = this.props;
+
     return (
       <div className={'card'}>
-        <h3 className={'card__title'}>{this.props.title}</h3>
-        <img src={this.props.thumbnailUrl} className={'image'} alt={this.props.title} />
+        <h3 className={'card__title'}>{title}</h3>
+        <img src={thumbnailUrl} className={'image'} alt={title} />
         <div className={'card__description'}>
           <p className={'card__description-count'}>
-            <strong>Page Count:</strong> {this.props.pageCount}
+            <strong>Page Count:</strong> {pageCount}
           </p>
           <p className={'card__description-count'}>
-            <strong>Authors:</strong> {this.props.authors}
+            <strong>Authors:</strong> {authors.join(', ')}
           </p>
-          <p className={'card__description-text'}>{this.props.shortDescription}</p>
+          <p className={'card__description-text'}>{shortDescription}</p>
         </div>
       </div>
     );
