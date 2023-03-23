@@ -10,12 +10,12 @@ type CardsFieldType = {
 };
 
 export default class CardsField extends React.Component<CardsFieldType> {
-  data = this.props.cards;
-
   render() {
+    const { cards } = this.props;
+
     return (
       <div className={'cards'}>
-        {this.data.map((el, idx) => (
+        {cards.map((el, idx) => (
           <Card
             key={`${el.title}-${idx}`}
             title={el.title}

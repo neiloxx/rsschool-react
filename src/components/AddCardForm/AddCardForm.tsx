@@ -1,19 +1,25 @@
-import TextInput from 'components/ui/inputs/TextInput';
-import { validateTitle } from 'helpers/validators';
 import React from 'react';
 
+import TextInput from 'components/ui/inputs/TextInput';
+import { CardType } from 'types/types';
+import { validateTitle } from 'helpers/validators';
+
 import './AddCardForm.scss';
+
+type AddCardFormProps = {
+  addCard: (card: CardType) => void;
+};
 
 type FormFieldsType = {
   title: React.RefObject<HTMLInputElement>;
 };
 
 type FormState = {
-  initial: { [x: string]: string | number };
+  initial: CardType;
   errors: { [x: string]: string[] };
 };
 
-export default class AddCardForm extends React.Component {
+export default class AddCardForm extends React.Component<AddCardFormProps> {
   fields: FormFieldsType = {
     title: React.createRef<HTMLInputElement>(),
   };
@@ -44,7 +50,8 @@ export default class AddCardForm extends React.Component {
   handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     if (await this.IsFormValid()) {
-      this.setState({ initial: { title: this.fields.title.current?.value } });
+      await this.setState({ initial: { title: this.fields.title.current?.value } });
+      this.props.addCard(this.state.initial);
     }
   };
 
