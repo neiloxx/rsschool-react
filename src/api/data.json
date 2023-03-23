@@ -1,6 +1,6 @@
 [
   {
-    "_id": 1,
+    "id": "e1633d9f-3d7e-45ea-8c70-419a57b88149",
     "title": "Unlocking Android",
     "isbn": "1933988673",
     "pageCount": 416,
@@ -22,7 +22,7 @@
     ]
   },
   {
-    "_id": 2,
+    "id": "4ede116a-58eb-4592-9280-31c3b71f95d7",
     "title": "Android in Action, Second Edition",
     "isbn": "1935182722",
     "pageCount": 592,
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "_id": 7,
+    "id": "b322d1e6-7b56-484e-8484-08d3e7acd644",
     "title": "Zend Framework in Action",
     "isbn": "1933988320",
     "pageCount": 432,
@@ -63,7 +63,7 @@
     ]
   },
   {
-    "_id": 8,
+    "id": "6b5d1b70-5652-4a10-971b-1c666d14a916",
     "title": "Flex on Java",
     "isbn": "1933988797",
     "pageCount": 265,
@@ -83,7 +83,7 @@
     ]
   },
   {
-    "_id": 9,
+    "id": "35269e3e-9fdb-4266-8196-9b7dcda580ba",
     "title": "Griffon in Action",
     "isbn": "1935182234",
     "pageCount": 375,
@@ -104,7 +104,7 @@
     ]
   },
   {
-    "_id": 10,
+    "id": "e97b5a44-b78b-4e91-86f0-45f4469548ff",
     "title": "OSGi in Depth",
     "isbn": "193518217X",
     "pageCount": 325,
@@ -123,7 +123,7 @@
     ]
   },
   {
-    "_id": 11,
+    "id": "eb1dfe54-70f4-436b-b40d-7ef41bd68ab8",
     "title": "Flexible Rails",
     "isbn": "1933988509",
     "pageCount": 592,
@@ -142,7 +142,7 @@
     ]
   },
   {
-    "_id": 13,
+    "id": "a55570e9-e2ff-4b39-a1c4-6c5eb61f0bd1",
     "title": "Hello! Flex 4",
     "isbn": "1933988762",
     "pageCount": 258,
@@ -161,7 +161,7 @@
     ]
   },
   {
-    "_id": 14,
+    "id": "6c7203d7-ad5a-4c3b-820b-1244c400b0cd",
     "title": "Coffeehouse",
     "isbn": "1884777384",
     "pageCount": 316,
@@ -181,7 +181,7 @@
     ]
   },
   {
-    "_id": 16,
+    "id": "078fb241-c75b-462f-9062-fb74f178482d",
     "title": "Brownfield Application Development in .NET",
     "isbn": "1933988711",
     "pageCount": 550,

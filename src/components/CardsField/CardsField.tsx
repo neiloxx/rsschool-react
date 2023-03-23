@@ -15,9 +15,10 @@ export default class CardsField extends React.Component<CardsFieldType> {
 
     return (
       <div className={'cards'}>
-        {cards.map((el, idx) => (
+        {cards.map((el) => (
           <Card
-            key={`${el.title}-${idx}`}
+            key={`${el.title}-${el.id}`}
+            id={el.id}
             title={el.title}
             thumbnailUrl={el.thumbnailUrl}
             authors={el.authors}

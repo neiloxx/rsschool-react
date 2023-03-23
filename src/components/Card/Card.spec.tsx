@@ -5,9 +5,10 @@ import Card from 'components/Card/Card';
 
 describe('Card', () => {
   const TEST_DATA = {
+    id: 'id',
     title: 'Title',
     thumbnailUrl: 'thumbnailUrl',
-    authors: 'authors',
+    authors: ['authors'],
     shortDescription: 'shortDescription',
     pageCount: 23,
   };
@@ -16,7 +17,7 @@ describe('Card', () => {
 
   it('should render card', () => {
     expect(screen.getByText(TEST_DATA.title)).toBeInTheDocument();
-    expect(screen.getByText(TEST_DATA.authors)).toBeInTheDocument();
+    expect(screen.getByText(TEST_DATA.authors[0])).toBeInTheDocument();
     expect(screen.getByText(TEST_DATA.shortDescription)).toBeInTheDocument();
     expect(screen.getByText(TEST_DATA.pageCount)).toBeInTheDocument();
   });

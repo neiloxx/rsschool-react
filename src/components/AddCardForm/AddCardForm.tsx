@@ -3,6 +3,7 @@ import React from 'react';
 import TextInput from 'components/ui/inputs/TextInput';
 import { CardType } from 'types/types';
 import { validateTitle } from 'helpers/validators';
+import generateId from 'utils/generateId';
 
 import './AddCardForm.scss';
 
@@ -10,33 +11,32 @@ type AddCardFormProps = {
   addCard: (card: CardType) => void;
 };
 
-type FormFieldsType = {
-  title: React.RefObject<HTMLInputElement>;
-};
+type FormFieldsType = { [x: string]: React.RefObject<HTMLInputElement> };
 
 type FormState = {
-  initial: CardType;
   errors: { [x: string]: string[] };
 };
 
 export default class AddCardForm extends React.Component<AddCardFormProps> {
+  initialValues: CardType = {
+    id: generateId(),
+    title: '',
+  };
+
   fields: FormFieldsType = {
     title: React.createRef<HTMLInputElement>(),
   };
 
   state: FormState = {
-    initial: {
-      title: '',
-    },
     errors: {
       title: [],
     },
   };
 
-  IsFormValid = async () => {
+  IsFormValid = async (): Promise<boolean> => {
     await this.setState({
       errors: {
-        title: validateTitle(this.fields.title.current?.value || `${this.state.initial.title}`),
+        title: validateTitle(this.fields.title.current?.value || this.initialValues.title),
       },
     });
     for (const error of Object.values(this.state.errors)) {
@@ -50,8 +50,8 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
   handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     if (await this.IsFormValid()) {
-      await this.setState({ initial: { title: this.fields.title.current?.value } });
-      this.props.addCard(this.state.initial);
+      this.initialValues.title = this.fields.title.current?.value || '';
+      this.props.addCard(this.initialValues);
     }
   };
 
@@ -61,11 +61,10 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
         <div className={'form-inner'}>
           <TextInput
             id="title"
-            label="Title"
+            label="Book Title"
             refProp={this.fields.title}
             errors={this.state.errors.title}
           />
-          <input type={'text'} />
           <button type={'submit'}>Submit</button>
         </div>
       </form>
