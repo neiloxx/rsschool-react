@@ -17,7 +17,7 @@ export default class Card extends React.Component<CardType> {
             <strong>Page Count:</strong> {pageCount}
           </p>
           <p className={'card__description-count'}>
-            <strong>Authors:</strong> {authors.join(', ')}
+            <strong>Authors:</strong> {authors?.join(', ')}
           </p>
           <p className={'card__description-text'}>{shortDescription}</p>
         </div>

@@ -8,9 +8,8 @@ export default class FormPage extends React.Component {
     cards: [],
   };
 
-  addCard = async (card: CardType) => {
-    const cards = [...this.state.cards, card];
-    await this.setState({ cards });
+  addCard = (card: CardType) => {
+    this.setState({ cards: [...this.state.cards, card] });
   };
 
   render() {

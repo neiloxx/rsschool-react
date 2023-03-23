@@ -18,10 +18,7 @@ type FormState = {
 };
 
 export default class AddCardForm extends React.Component<AddCardFormProps> {
-  initialValues: CardType = {
-    id: generateId(),
-    title: '',
-  };
+  form: React.RefObject<HTMLFormElement> = React.createRef();
 
   fields: FormFieldsType = {
     title: React.createRef<HTMLInputElement>(),
@@ -36,7 +33,7 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
   IsFormValid = async (): Promise<boolean> => {
     await this.setState({
       errors: {
-        title: validateTitle(this.fields.title.current?.value || this.initialValues.title),
+        title: validateTitle(`${this.fields.title.current?.value}`),
       },
     });
     for (const error of Object.values(this.state.errors)) {
@@ -47,17 +44,24 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
     return true;
   };
 
+  getValues = (): CardType => {
+    return {
+      id: generateId(),
+      title: this.fields.title.current?.value,
+    };
+  };
+
   handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     if (await this.IsFormValid()) {
-      this.initialValues.title = this.fields.title.current?.value || '';
-      this.props.addCard(this.initialValues);
+      this.props.addCard(this.getValues());
+      this.form.current?.reset();
     }
   };
 
   render() {
     return (
-      <form className={'form'} onSubmit={this.handleSubmit}>
+      <form className={'form'} ref={this.form} onSubmit={this.handleSubmit}>
         <div className={'form-inner'}>
           <TextInput
             id="title"

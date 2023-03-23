@@ -1,6 +1,6 @@
 export type CardType = {
   id: string;
-  title: string;
+  title?: string;
   thumbnailUrl?: string;
   authors?: string[];
   shortDescription?: string;
