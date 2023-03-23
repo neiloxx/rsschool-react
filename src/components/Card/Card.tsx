@@ -1,16 +1,10 @@
 import React from 'react';
 
-import 'components/Card/Card.scss';
+import { CardType } from 'types/types';
 
-interface CardProps {
-  title: string;
-  thumbnailUrl: string;
-  authors: string;
-  shortDescription: string;
-  pageCount: number;
-}
+import './Card.scss';
 
-export default class Card extends React.Component<CardProps> {
+export default class Card extends React.Component<CardType> {
   render() {
     return (
       <div className={'card'}>
