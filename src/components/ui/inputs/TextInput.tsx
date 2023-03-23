@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import './inputs.scss';
 import './TextInput.scss';
 
 type InputProps = {
@@ -15,9 +16,9 @@ export default class TextInput extends React.Component<InputProps> {
     const { id, placeholder, label, errors, refProp } = this.props;
 
     return (
-      <div className={'input-wrapper'}>
+      <div className={'field-wrapper'}>
         <label htmlFor={id} className={'text-input-label'}>
-          <span className={'text-input-label__text'}>{label}</span>
+          <span>{label}</span>
           <input
             id={id}
             type={'text'}
@@ -26,7 +27,7 @@ export default class TextInput extends React.Component<InputProps> {
             className={'text-input'}
           />
         </label>
-        <p className={'text-input-error'}>{errors && errors.join(', ')}</p>
+        <p className={'field-error'}>{errors && errors.join(', ')}</p>
       </div>
     );
   }
