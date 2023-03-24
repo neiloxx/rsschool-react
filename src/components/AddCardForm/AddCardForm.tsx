@@ -1,3 +1,4 @@
+import Switch from 'components/ui/inputs/Switch';
 import React from 'react';
 
 import TextInput from 'components/ui/inputs/TextInput';
@@ -11,10 +12,18 @@ type AddCardFormProps = {
   addCard: (card: CardType) => void;
 };
 
-type FormFieldsType = { [x: string]: React.RefObject<HTMLInputElement> };
+type FormFieldsType = {
+  title: React.RefObject<HTMLInputElement>;
+  status: React.RefObject<HTMLInputElement>[];
+};
 
 type FormState = {
   errors: { [x: string]: string[] };
+};
+
+const SWITCH = {
+  id: 'publish-switch',
+  labels: ['published', 'unpublished'],
 };
 
 export default class AddCardForm extends React.Component<AddCardFormProps> {
@@ -22,6 +31,7 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
 
   fields: FormFieldsType = {
     title: React.createRef<HTMLInputElement>(),
+    status: SWITCH.labels.map(() => React.createRef()),
   };
 
   state: FormState = {
@@ -45,8 +55,11 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
   };
 
   getValues = (): CardType => {
+    const currenStatusInput = this.fields.status.find((el) => el.current?.checked);
+
     return {
       id: generateId(),
+      status: currenStatusInput?.current?.value,
       title: this.fields.title.current?.value,
     };
   };
@@ -69,6 +82,7 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
             refProp={this.fields.title}
             errors={this.state.errors.title}
           />
+          <Switch id={SWITCH.id} labels={SWITCH.labels} refProps={this.fields.status} />
           <button type={'submit'}>Submit</button>
         </div>
       </form>

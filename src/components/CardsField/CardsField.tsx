@@ -20,6 +20,7 @@ export default class CardsField extends React.Component<CardsFieldType> {
             key={`${el.title}-${el.id}`}
             id={el.id}
             title={el.title}
+            status={el.status}
             thumbnailUrl={el.thumbnailUrl}
             authors={el.authors}
             shortDescription={el.shortDescription}

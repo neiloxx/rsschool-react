@@ -1,0 +1,48 @@
+.switch {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  & .field-wrapper {
+    border: 1px solid var(--dark-text-color);
+    user-select: none;
+    flex: 1 1 auto;
+    width: 25%;
+
+
+    &:first-of-type {
+      border-radius: .4rem 0 0 .4rem;
+    }
+
+    &:last-of-type {
+      border-radius: 0 .4rem .4rem 0;
+    }
+
+    & + .field-wrapper {
+      border-left: none;
+    }
+  }
+
+  & label {
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  & span {
+    transition: .3s background-color ease-in;
+    padding: .5rem;
+    width: 100%;
+    text-transform: capitalize;
+  }
+
+  & input {
+    appearance: none;
+  }
+
+  & input:checked ~ span {
+    background-color: var(--primary-bg-color);
+    color: var(--light-text-color);
+  }
+}
