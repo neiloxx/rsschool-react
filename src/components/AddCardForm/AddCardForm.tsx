@@ -1,10 +1,13 @@
-import Switch from 'components/ui/inputs/Switch';
 import React from 'react';
-
-import TextInput from 'components/ui/inputs/TextInput';
-import { CardType } from 'types/types';
-import { validateTitle } from 'helpers/validators';
 import generateId from 'utils/generateId';
+
+import Form from 'components/Form/Form';
+import Switch from 'components/ui/inputs/Switch';
+import TextInput from 'components/ui/inputs/TextInput';
+
+import { CardType, FormErrorsType } from 'types/types';
+import { validateTitle } from 'helpers/validators';
+import { fields } from './formFields';
 
 import './AddCardForm.scss';
 
@@ -12,80 +15,61 @@ type AddCardFormProps = {
   addCard: (card: CardType) => void;
 };
 
-type FormFieldsType = {
-  title: React.RefObject<HTMLInputElement>;
-  status: React.RefObject<HTMLInputElement>[];
-};
-
 type FormState = {
   errors: { [x: string]: string[] };
 };
 
-const SWITCH = {
-  id: 'publish-switch',
-  labels: ['published', 'unpublished'],
-};
-
 export default class AddCardForm extends React.Component<AddCardFormProps> {
   form: React.RefObject<HTMLFormElement> = React.createRef();
-
-  fields: FormFieldsType = {
-    title: React.createRef<HTMLInputElement>(),
-    status: SWITCH.labels.map(() => React.createRef()),
+  validators = {
+    title: () => validateTitle(`${fields.text.refProp.current!.value}`),
   };
 
   state: FormState = {
-    errors: {
-      title: [],
-    },
-  };
-
-  IsFormValid = async (): Promise<boolean> => {
-    await this.setState({
-      errors: {
-        title: validateTitle(`${this.fields.title.current?.value}`),
-      },
-    });
-    for (const error of Object.values(this.state.errors)) {
-      if (error.length) {
-        return false;
-      }
-    }
-    return true;
+    errors: {},
   };
 
   getValues = (): CardType => {
-    const currenStatusInput = this.fields.status.find((el) => el.current?.checked);
+    const currenStatusInput = fields.switch.refProps.find((el) => el.current?.checked);
 
     return {
       id: generateId(),
       status: currenStatusInput?.current?.value,
-      title: this.fields.title.current?.value,
+      title: fields.text.refProp.current?.value,
     };
   };
 
-  handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    event.preventDefault();
-    if (await this.IsFormValid()) {
-      this.props.addCard(this.getValues());
-      this.form.current?.reset();
-    }
+  onFormError = (errors: FormErrorsType) => {
+    this.setState({ errors: { ...errors } });
+  };
+
+  onFormSuccess = () => {
+    this.props.addCard(this.getValues());
+    this.setState({ errors: {} });
+    this.form.current?.reset();
   };
 
   render() {
     return (
-      <form className={'form'} ref={this.form} onSubmit={this.handleSubmit}>
-        <div className={'form-inner'}>
-          <TextInput
-            id="title"
-            label="Book Title"
-            refProp={this.fields.title}
-            errors={this.state.errors.title}
-          />
-          <Switch id={SWITCH.id} labels={SWITCH.labels} refProps={this.fields.status} />
-          <button type={'submit'}>Submit</button>
-        </div>
-      </form>
+      <Form
+        refProp={this.form}
+        onFormError={this.onFormError}
+        onFormSuccess={this.onFormSuccess}
+        validators={this.validators}
+      >
+        <TextInput
+          id={fields.text.id}
+          label={fields.text.label}
+          refProp={fields.text.refProp}
+          errors={this.state.errors.title}
+        />
+        <Switch
+          id={fields.switch.id}
+          labels={fields.switch.labels}
+          refProps={fields.switch.refProps}
+        />
+        <button type={'submit'}>Submit</button>
+      </Form>
     );
   }
 }

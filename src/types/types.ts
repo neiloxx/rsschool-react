@@ -7,3 +7,5 @@ export type CardType = {
   shortDescription?: string;
   pageCount?: number;
 };
+
+export type FormErrorsType = { [x: string]: string[] };
