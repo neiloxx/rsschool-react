@@ -12,9 +12,16 @@ type TextInputType = {
   refProp: React.RefObject<HTMLInputElement>;
 };
 
+type DateInputType = {
+  id: string;
+  label: string;
+  refProp: React.RefObject<HTMLInputElement>;
+};
+
 type FieldsType = {
   switch: SwitchType;
   text: TextInputType;
+  date: DateInputType;
 };
 
 export const fields: FieldsType = {
@@ -22,6 +29,11 @@ export const fields: FieldsType = {
   text: {
     id: 'title',
     label: 'Book Title',
+    refProp: React.createRef<HTMLInputElement>(),
+  },
+  date: {
+    id: 'publish-date',
+    label: 'publish date',
     refProp: React.createRef<HTMLInputElement>(),
   },
 };

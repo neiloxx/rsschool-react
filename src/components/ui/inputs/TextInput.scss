@@ -1,9 +1,6 @@
 .text-input {
-  display: block;
   width: 100%;
-  padding: 8px 16px;
-  line-height: 25px;
-  font-size: 14px;
+  padding: .5rem 1rem;
   font-weight: 500;
   font-family: inherit;
   border-radius: 6px;
@@ -19,7 +16,6 @@
 
   &:focus {
     outline: none;
-    border-color: var(--input-border-focus);
   }
 }
 
@@ -30,8 +26,7 @@
 
   & > span {
     text-align: center;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: .5rem .8rem;
     line-height: 25px;
     color: var(--light-text-color);
     background: var(--primary-bg-color);

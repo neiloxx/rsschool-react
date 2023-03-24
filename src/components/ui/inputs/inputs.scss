@@ -2,11 +2,12 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 
 .field-wrapper .field-error {
-  min-height: 2rem;
+  min-height: 1.3rem;
   font-size: 0.8rem;
   color: var(--error-text-color);
 }

@@ -1,11 +1,12 @@
 export type CardType = {
+  authors?: string[];
   id: string;
-  title?: string;
+  pageCount?: number;
+  publishedDate?: string;
+  shortDescription?: string;
   status?: string;
   thumbnailUrl?: string;
-  authors?: string[];
-  shortDescription?: string;
-  pageCount?: number;
+  title?: string;
 };
 
 export type FormErrorsType = { [x: string]: string[] };
