@@ -51,7 +51,15 @@ export const validateCategories = (v: string[]) => {
 
 export const validateImage = (v: FileList | undefined | null) => {
   const file = v && v[0];
-  console.log(file);
   const rules = [(file && file.type.includes('image')) || 'Use a valid image', file || 'Add image'];
+  return checkRules(rules);
+};
+
+export const validateAuthors = (v: string) => {
+  const rules = [
+    isRequired(v) || 'Authors is required',
+    isMinLength(v.length, 3) || `Authors initials must be at least 3 characters long`,
+    isMaxLength(v.length, 20) || `Authors initials must be at most 20 characters long`,
+  ];
   return checkRules(rules);
 };

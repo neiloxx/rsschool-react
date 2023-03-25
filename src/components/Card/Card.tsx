@@ -26,7 +26,7 @@ export default class Card extends React.Component<CardType> {
             <strong>Language:</strong> {language}
           </p>
           <p className={'card__description-field'}>
-            <strong>Authors:</strong> {authors?.join(', ')}
+            <strong>Authors:</strong> {authors}
           </p>
           <p className={'card__description-field status'}>
             <strong>Status:</strong> <span>{status}</span>

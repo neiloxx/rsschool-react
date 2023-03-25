@@ -21,11 +21,12 @@ type dropdownFieldsType = {
 };
 
 type FieldsType = {
+  authors: SingleItemType;
   checkbox: MultipleItemType;
   date: SingleItemType;
   dropdown: dropdownFieldsType;
   switch: MultipleItemType;
-  text: SingleItemType;
+  title: SingleItemType;
   thumbnailUrl: SingleItemType;
 };
 
@@ -34,9 +35,14 @@ const dropdownOptions = ['English', 'Russian', 'French', 'Spanish'];
 
 export const fields: FieldsType = {
   switch: { id: 'publish-switch', labels: ['published', 'unpublished'], refProps: [] },
-  text: {
+  title: {
     id: 'title',
     label: 'Book Title',
+    refProp: React.createRef<HTMLInputElement>(),
+  },
+  authors: {
+    id: 'authors',
+    label: 'Authors',
     refProp: React.createRef<HTMLInputElement>(),
   },
   date: {

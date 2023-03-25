@@ -1,5 +1,5 @@
 export type CardType = {
-  authors?: string[];
+  authors: string;
   categories: string[];
   id: string;
   language: string;

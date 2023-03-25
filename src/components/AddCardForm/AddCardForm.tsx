@@ -11,6 +11,7 @@ import DateInput from 'components/ui/inputs/DateInput';
 
 import { CardType, FormErrorsType } from 'types/types';
 import {
+  validateAuthors,
   validateCategories,
   validateImage,
   validatePublishDate,
@@ -31,7 +32,8 @@ type FormState = {
 export default class AddCardForm extends React.Component<AddCardFormProps> {
   form: React.RefObject<HTMLFormElement> = React.createRef();
   validators = {
-    title: () => validateTitle(`${fields.text.refProp.current!.value}`),
+    authors: () => validateAuthors(fields.authors.refProp.current!.value),
+    title: () => validateTitle(fields.title.refProp.current!.value),
     date: () =>
       validatePublishDate(
         `${fields.date.refProp.current!.value}`,
@@ -58,13 +60,14 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
 
   getValues = (): CardType => {
     return {
-      id: generateId(),
-      status: this.getCheckedValue(fields.switch.refProps).join(''),
-      title: fields.text.refProp.current!.value,
-      publishedDate: fields.date.refProp.current?.value,
+      authors: fields.authors.refProp.current!.value,
       categories: this.getCheckedValue(fields.checkbox.refProps),
+      id: generateId(),
       language: fields.dropdown.refProp.current!.value,
+      publishedDate: fields.date.refProp.current?.value,
+      status: this.getCheckedValue(fields.switch.refProps).join(''),
       thumbnailUrl: this.getImageUrl(),
+      title: fields.title.refProp.current!.value,
     };
   };
 
@@ -87,10 +90,16 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
         validators={this.validators}
       >
         <TextInput
-          id={fields.text.id}
-          label={fields.text.label}
-          refProp={fields.text.refProp}
+          id={fields.title.id}
+          label={fields.title.label}
+          refProp={fields.title.refProp}
           errors={this.state.errors.title}
+        />
+        <TextInput
+          id={fields.authors.id}
+          label={fields.authors.label}
+          refProp={fields.authors.refProp}
+          errors={this.state.errors.authors}
         />
         <Switch
           id={fields.switch.id}
