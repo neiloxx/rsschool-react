@@ -3,7 +3,7 @@ import * as React from 'react';
 import Checkbox from 'components/ui/inputs/Checkbox';
 
 import './inputs.scss';
-import 'components/ui/inputs/CheckboxField.scss';
+import './CheckboxField.scss';
 
 type SwitchProps = {
   id: string;

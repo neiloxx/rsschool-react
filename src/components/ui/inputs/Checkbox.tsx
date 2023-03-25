@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import './inputs.scss';
-import 'components/ui/inputs/Checkbox.scss';
+import './Checkbox.scss';
 
 type InputProps = {
   id?: string;
