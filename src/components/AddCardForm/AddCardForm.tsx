@@ -1,4 +1,5 @@
 import Dropdown from 'components/ui/dropdown/Dropdown';
+import FileInput from 'components/ui/inputs/FileInput';
 import React from 'react';
 import generateId from 'utils/generateId';
 
@@ -9,7 +10,12 @@ import CheckboxField from 'components/ui/inputs/CheckboxField';
 import DateInput from 'components/ui/inputs/DateInput';
 
 import { CardType, FormErrorsType } from 'types/types';
-import { validateCategories, validatePublishDate, validateTitle } from 'helpers/validators';
+import {
+  validateCategories,
+  validateImage,
+  validatePublishDate,
+  validateTitle,
+} from 'helpers/validators';
 import { fields } from './formFields';
 
 import './AddCardForm.scss';
@@ -32,6 +38,7 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
         this.getCheckedValue(fields.switch.refProps).join('')
       ),
     categories: () => validateCategories(this.getCheckedValue(fields.checkbox.refProps)),
+    thumbnailUrl: () => validateImage(fields.thumbnailUrl.refProp.current?.files),
   };
 
   state: FormState = {
@@ -43,6 +50,12 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
     return checkedRefs.map((el) => el.current!.value);
   };
 
+  getImageUrl = () => {
+    const files = fields.thumbnailUrl.refProp.current?.files;
+    const file = files && files[0];
+    return file ? URL.createObjectURL(file) : undefined;
+  };
+
   getValues = (): CardType => {
     return {
       id: generateId(),
@@ -51,6 +64,7 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
       publishedDate: fields.date.refProp.current?.value,
       categories: this.getCheckedValue(fields.checkbox.refProps),
       language: fields.dropdown.refProp.current!.value,
+      thumbnailUrl: this.getImageUrl(),
     };
   };
 
@@ -100,6 +114,13 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
           label={fields.dropdown.label}
           options={fields.dropdown.options}
           refProp={fields.dropdown.refProp}
+        />
+        <FileInput
+          id={fields.thumbnailUrl.id}
+          label={fields.thumbnailUrl.label}
+          formats={fields.thumbnailUrl.formats}
+          refProp={fields.thumbnailUrl.refProp}
+          errors={this.state.errors.thumbnailUrl}
         />
         <button type={'submit'}>Submit</button>
       </Form>

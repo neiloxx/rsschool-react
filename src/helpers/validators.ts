@@ -22,7 +22,7 @@ const isPublished = (value: string): boolean => value === 'published';
 
 const isDateValid = (value: string): boolean => !Number.isNaN(new Date(value));
 
-const checkRules = (rules: (string | boolean)[]) =>
+const checkRules = (rules: (string | boolean | File)[]): string[] =>
   rules.filter((rule) => typeof rule === 'string') as string[];
 
 export const validateTitle = (v: string): string[] => {
@@ -46,5 +46,12 @@ export const validatePublishDate = (v: string, status: string): string[] => {
 
 export const validateCategories = (v: string[]) => {
   const rules = [!!v.length || 'Choose at least one category'];
+  return checkRules(rules);
+};
+
+export const validateImage = (v: FileList | undefined | null) => {
+  const file = v && v[0];
+  console.log(file);
+  const rules = [(file && file.type.includes('image')) || 'Use a valid image', file || 'Add image'];
   return checkRules(rules);
 };

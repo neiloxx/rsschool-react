@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import './inputs.scss';
-import './DateInput.scss';
 
 type InputProps = {
   id?: string;

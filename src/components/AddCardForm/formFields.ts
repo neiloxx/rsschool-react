@@ -9,6 +9,7 @@ type MultipleItemType = {
 type SingleItemType = {
   id: string;
   label: string;
+  formats?: string;
   refProp: React.RefObject<HTMLInputElement>;
 };
 
@@ -25,6 +26,7 @@ type FieldsType = {
   dropdown: dropdownFieldsType;
   switch: MultipleItemType;
   text: SingleItemType;
+  thumbnailUrl: SingleItemType;
 };
 
 const checkBoxCategories = ['Web Development', 'Mobile', 'Machine Learning', 'Data Science'];
@@ -52,6 +54,12 @@ export const fields: FieldsType = {
     label: 'Book language',
     options: dropdownOptions,
     refProp: React.createRef<HTMLSelectElement>(),
+  },
+  thumbnailUrl: {
+    id: 'card-image',
+    label: 'Upload image',
+    formats: '.jpg, .png',
+    refProp: React.createRef<HTMLInputElement>(),
   },
 };
 
