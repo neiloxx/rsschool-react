@@ -1,28 +1,25 @@
 import React from 'react';
 
-type SwitchType = {
+type MultipleItemType = {
   id: string;
   labels: string[];
   refProps: React.RefObject<HTMLInputElement>[];
 };
 
-type TextInputType = {
-  id: string;
-  label: string;
-  refProp: React.RefObject<HTMLInputElement>;
-};
-
-type DateInputType = {
+type SingleItemType = {
   id: string;
   label: string;
   refProp: React.RefObject<HTMLInputElement>;
 };
 
 type FieldsType = {
-  switch: SwitchType;
-  text: TextInputType;
-  date: DateInputType;
+  switch: MultipleItemType;
+  text: SingleItemType;
+  date: SingleItemType;
+  checkbox: MultipleItemType;
 };
+
+const checkBoxCategories = ['Web Development', 'Mobile', 'Machine Learning', 'Data Science'];
 
 export const fields: FieldsType = {
   switch: { id: 'publish-switch', labels: ['published', 'unpublished'], refProps: [] },
@@ -36,11 +33,16 @@ export const fields: FieldsType = {
     label: 'publish date',
     refProp: React.createRef<HTMLInputElement>(),
   },
+  checkbox: {
+    id: 'categories',
+    labels: checkBoxCategories,
+    refProps: [],
+  },
 };
 
-const setSwitchRefs = (): void =>
-  fields.switch.labels.forEach(() =>
-    fields.switch.refProps.push(React.createRef<HTMLInputElement>())
-  );
+function setMultipleRefs(field: MultipleItemType): void {
+  field.labels.forEach(() => field.refProps.push(React.createRef<HTMLInputElement>()));
+}
 
-setSwitchRefs();
+setMultipleRefs(fields.switch);
+setMultipleRefs(fields.checkbox);

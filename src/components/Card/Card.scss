@@ -24,10 +24,6 @@
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
-
-      & span {
-        text-transform: uppercase;
-      }
     }
 
     &-text {
@@ -40,6 +36,14 @@
   }
 }
 
+.status > span {
+  text-transform: uppercase;
+}
+
+.categories > span {
+  font-size: .8rem;
+  font-weight: 600;
+}
 
 .image {
   max-width: 10rem;

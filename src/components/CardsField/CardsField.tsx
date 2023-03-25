@@ -17,15 +17,16 @@ export default class CardsField extends React.Component<CardsFieldType> {
       <div className={'cards'}>
         {cards.map((el) => (
           <Card
-            key={`${el.title}-${el.id}`}
+            authors={el.authors}
+            categories={el.categories}
             id={el.id}
-            title={el.title}
+            key={`${el.title}-${el.id}`}
+            pageCount={el.pageCount}
             publishedDate={el.publishedDate}
+            shortDescription={el.shortDescription}
             status={el.status}
             thumbnailUrl={el.thumbnailUrl}
-            authors={el.authors}
-            shortDescription={el.shortDescription}
-            pageCount={el.pageCount}
+            title={el.title}
           />
         ))}
       </div>

@@ -1,13 +1,14 @@
-import DateInput from 'components/ui/inputs/DateInput';
 import React from 'react';
 import generateId from 'utils/generateId';
 
 import Form from 'components/Form/Form';
 import Switch from 'components/ui/inputs/Switch';
 import TextInput from 'components/ui/inputs/TextInput';
+import CheckboxField from 'components/ui/inputs/CheckboxField';
+import DateInput from 'components/ui/inputs/DateInput';
 
 import { CardType, FormErrorsType } from 'types/types';
-import { validatePublishDate, validateTitle } from 'helpers/validators';
+import { validateCategories, validatePublishDate, validateTitle } from 'helpers/validators';
 import { fields } from './formFields';
 
 import './AddCardForm.scss';
@@ -24,22 +25,30 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
   form: React.RefObject<HTMLFormElement> = React.createRef();
   validators = {
     title: () => validateTitle(`${fields.text.refProp.current!.value}`),
-    date: () => validatePublishDate(`${fields.date.refProp.current!.value}`, this.getSwitchValue()),
+    date: () =>
+      validatePublishDate(
+        `${fields.date.refProp.current!.value}`,
+        this.getCheckedValue(fields.switch.refProps).join('')
+      ),
+    categories: () => validateCategories(this.getCheckedValue(fields.checkbox.refProps)),
   };
 
   state: FormState = {
     errors: {},
   };
 
-  getSwitchValue = (): string =>
-    fields.switch.refProps.find((el) => el.current?.checked)!.current!.value;
+  getCheckedValue = (refProps: React.RefObject<HTMLInputElement>[]): string[] => {
+    const checkedRefs = refProps.filter((el) => el.current?.checked);
+    return checkedRefs.map((el) => el.current!.value);
+  };
 
   getValues = (): CardType => {
     return {
       id: generateId(),
-      status: this.getSwitchValue(),
+      status: this.getCheckedValue(fields.switch.refProps).join(''),
       title: fields.text.refProp.current?.value,
       publishedDate: fields.date.refProp.current?.value,
+      categories: this.getCheckedValue(fields.checkbox.refProps),
     };
   };
 
@@ -77,6 +86,12 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
           label={fields.date.label}
           refProp={fields.date.refProp}
           errors={this.state.errors.date}
+        />
+        <CheckboxField
+          id={fields.checkbox.id}
+          labels={fields.checkbox.labels}
+          refProps={fields.checkbox.refProps}
+          errors={this.state.errors.categories}
         />
         <button type={'submit'}>Submit</button>
       </Form>

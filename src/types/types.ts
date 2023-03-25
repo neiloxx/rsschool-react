@@ -1,5 +1,6 @@
 export type CardType = {
   authors?: string[];
+  categories: string[];
   id: string;
   pageCount?: number;
   publishedDate?: string;

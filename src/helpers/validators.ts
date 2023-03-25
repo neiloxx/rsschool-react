@@ -43,3 +43,8 @@ export const validatePublishDate = (v: string, status: string): string[] => {
     : [!isPublished(status) && !!v && 'The book should be published to have a date'];
   return checkRules(rules);
 };
+
+export const validateCategories = (v: string[]) => {
+  const rules = [!!v.length || 'Choose at least one category'];
+  return checkRules(rules);
+};

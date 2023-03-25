@@ -1,0 +1,28 @@
+.field-wrapper .checkbox {
+  & .label {
+    flex-direction: row;
+    gap: .5rem;
+    font-size: .8rem;
+  }
+
+  & .checkbox-input {
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: var(--secondary-bg-color);
+    outline: .1rem solid var(--dark-text-color);
+    transition: background-color .1s ease-in;
+
+    &:checked {
+      border-style: double;
+      background-color: var(--primary-bg-color);
+    }
+  }
+}
+
+.checkbox-input:focus .checkbox-input::before {
+  width: 80%;
+  height: 80%;
+}

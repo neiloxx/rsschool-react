@@ -6,8 +6,16 @@ import './Card.scss';
 
 export default class Card extends React.Component<CardType> {
   render() {
-    const { title, status, thumbnailUrl, pageCount, authors, publishedDate, shortDescription } =
-      this.props;
+    const {
+      authors,
+      categories,
+      pageCount,
+      publishedDate,
+      shortDescription,
+      status,
+      thumbnailUrl,
+      title,
+    } = this.props;
 
     return (
       <div className={'card'}>
@@ -25,6 +33,9 @@ export default class Card extends React.Component<CardType> {
           </p>
           <p className={'card__description-field'}>
             <strong>Date:</strong> {publishedDate || 'To be announced'}
+          </p>
+          <p className={'card__description-field categories'}>
+            <strong>Categories:</strong> <span>{categories.join(', ')}</span>
           </p>
           <p className={'card__description-text'}>{shortDescription}</p>
         </div>
