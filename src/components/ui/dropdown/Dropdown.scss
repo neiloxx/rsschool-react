@@ -1,0 +1,23 @@
+.dropdown {
+  &__label {
+    display: flex;
+    gap: 0 1rem;
+  }
+
+  &__text {
+    color: var(--dark-text-color);
+    font-weight: 600;
+  }
+
+  &__select {
+    max-width: 10rem;
+    width: 100%;
+    background-color: var(--secondary-bg-color);
+    color: var(--dark-text-color);
+    outline: none;
+  }
+
+  &__option {
+    color: var(--dark-text-color);
+  }
+}

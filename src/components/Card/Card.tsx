@@ -9,7 +9,7 @@ export default class Card extends React.Component<CardType> {
     const {
       authors,
       categories,
-      pageCount,
+      language,
       publishedDate,
       shortDescription,
       status,
@@ -23,7 +23,7 @@ export default class Card extends React.Component<CardType> {
         <img src={thumbnailUrl} className={'image'} alt={title} />
         <div className={'card__description'}>
           <p className={'card__description-field'}>
-            <strong>Page Count:</strong> {pageCount}
+            <strong>Language:</strong> {language}
           </p>
           <p className={'card__description-field'}>
             <strong>Authors:</strong> {authors?.join(', ')}

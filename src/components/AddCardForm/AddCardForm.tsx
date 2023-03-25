@@ -1,3 +1,4 @@
+import Dropdown from 'components/ui/dropdown/Dropdown';
 import React from 'react';
 import generateId from 'utils/generateId';
 
@@ -46,9 +47,10 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
     return {
       id: generateId(),
       status: this.getCheckedValue(fields.switch.refProps).join(''),
-      title: fields.text.refProp.current?.value,
+      title: fields.text.refProp.current!.value,
       publishedDate: fields.date.refProp.current?.value,
       categories: this.getCheckedValue(fields.checkbox.refProps),
+      language: fields.dropdown.refProp.current!.value,
     };
   };
 
@@ -92,6 +94,12 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
           labels={fields.checkbox.labels}
           refProps={fields.checkbox.refProps}
           errors={this.state.errors.categories}
+        />
+        <Dropdown
+          id={fields.dropdown.id}
+          label={fields.dropdown.label}
+          options={fields.dropdown.options}
+          refProp={fields.dropdown.refProp}
         />
         <button type={'submit'}>Submit</button>
       </Form>

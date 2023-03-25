@@ -12,14 +12,23 @@ type SingleItemType = {
   refProp: React.RefObject<HTMLInputElement>;
 };
 
+type dropdownFieldsType = {
+  id: string;
+  label: string;
+  options: string[];
+  refProp: React.RefObject<HTMLSelectElement>;
+};
+
 type FieldsType = {
+  checkbox: MultipleItemType;
+  date: SingleItemType;
+  dropdown: dropdownFieldsType;
   switch: MultipleItemType;
   text: SingleItemType;
-  date: SingleItemType;
-  checkbox: MultipleItemType;
 };
 
 const checkBoxCategories = ['Web Development', 'Mobile', 'Machine Learning', 'Data Science'];
+const dropdownOptions = ['English', 'Russian', 'French', 'Spanish'];
 
 export const fields: FieldsType = {
   switch: { id: 'publish-switch', labels: ['published', 'unpublished'], refProps: [] },
@@ -37,6 +46,12 @@ export const fields: FieldsType = {
     id: 'categories',
     labels: checkBoxCategories,
     refProps: [],
+  },
+  dropdown: {
+    id: 'language',
+    label: 'Book language',
+    options: dropdownOptions,
+    refProp: React.createRef<HTMLSelectElement>(),
   },
 };
 

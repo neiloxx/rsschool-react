@@ -21,7 +21,7 @@ export default class CardsField extends React.Component<CardsFieldType> {
             categories={el.categories}
             id={el.id}
             key={`${el.title}-${el.id}`}
-            pageCount={el.pageCount}
+            language={el.language}
             publishedDate={el.publishedDate}
             shortDescription={el.shortDescription}
             status={el.status}
