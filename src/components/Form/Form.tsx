@@ -41,7 +41,12 @@ export default class Form extends React.Component<FormProps> {
     const { children, refProp } = this.props;
 
     return (
-      <form className={'form'} ref={refProp} onSubmit={(event) => this.handleSubmit(event)}>
+      <form
+        className={'form'}
+        ref={refProp}
+        role="form"
+        onSubmit={(event) => this.handleSubmit(event)}
+      >
         <div className={'form-inner'}>{children}</div>
       </form>
     );
