@@ -27,6 +27,7 @@ export default class RadioInput extends React.Component<InputProps> {
             ref={refProp}
             className={'radio-input'}
             defaultChecked={!!isChecked}
+            data-testid={id}
           />
           <span>{label}</span>
         </label>

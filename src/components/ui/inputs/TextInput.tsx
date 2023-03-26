@@ -25,6 +25,7 @@ export default class TextInput extends React.Component<InputProps> {
             placeholder={placeholder}
             ref={refProp}
             className={'text-input'}
+            data-testid={id}
           />
         </label>
         <p className={'field-error'}>{errors && errors.join(', ')}</p>

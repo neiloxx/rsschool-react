@@ -24,6 +24,7 @@ export default class Checkbox extends React.Component<InputProps> {
             ref={refProp}
             value={label}
             className={'checkbox-input'}
+            data-testid={id}
           />
         </label>
         {errors && <p className={'field-error'}>{errors?.join(', ')}</p>}

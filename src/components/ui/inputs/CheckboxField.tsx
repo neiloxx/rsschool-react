@@ -20,7 +20,7 @@ export default class CheckboxField extends React.Component<SwitchProps> {
     return (
       <div className={'field-wrapper'}>
         <p className={'field-title'}>{`${id}:`}</p>
-        <div className={'checkbox-field'}>
+        <div className={'checkbox-field'} data-testid={id}>
           {labels.map((label, idx) => (
             <Checkbox
               key={`${id}-${label}`}

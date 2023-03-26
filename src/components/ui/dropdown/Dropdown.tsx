@@ -14,7 +14,7 @@ export default class Dropdown extends React.Component<DropdownProps> {
     const { id, label, options, refProp } = this.props;
 
     return (
-      <div className={'dropdown'}>
+      <div className={'dropdown'} data-testid={id}>
         <label htmlFor={id} className={'dropdown__label'}>
           <span className={'dropdown__text'}>{`${label}:`}</span>
           <select id={id} className={'dropdown__select'} ref={refProp}>

@@ -19,7 +19,14 @@ export default class FileInput extends React.Component<InputProps> {
       <div className={'field-wrapper file'}>
         <label htmlFor={id} className={'file-label'}>
           <span>{label}</span>
-          <input id={id} type={'file'} ref={refProp} className={'file-input'} accept={formats} />
+          <input
+            id={id}
+            type={'file'}
+            ref={refProp}
+            className={'file-input'}
+            accept={formats}
+            data-testid={id}
+          />
         </label>
         <p className={'field-error'}>{errors && errors.join(', ')}</p>
       </div>

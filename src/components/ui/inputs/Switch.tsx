@@ -18,7 +18,7 @@ export default class Switch extends React.Component<SwitchProps> {
 
     return (
       <div className={'field-wrapper'}>
-        <div className={'switch'}>
+        <div className={'switch'} data-testid={id}>
           {labels.map((label, idx) => (
             <RadioInput
               key={`${id}-${label}`}
