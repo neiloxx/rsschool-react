@@ -1,0 +1,22 @@
+.button {
+  min-height: 1rem;
+  padding: 1rem;
+  max-width: 10rem;
+  width: 100%;
+  align-self: center;
+  color: var(--dark-text-color);
+  background-color: var(--secondary-bg-color);
+  border: none;
+  border-radius: .5rem;
+  transition: background-color .3s ease-out;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: var(--primary-bg-color);
+    color: var(--light-text-color);
+  }
+
+  &:active {
+    background-color: var(--secondary-bg-color);
+  }
+}

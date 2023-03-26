@@ -1,4 +1,5 @@
 import Popup from 'components/Popup/Popup';
+import Button from 'components/ui/buttons/Button';
 import Dropdown from 'components/ui/dropdown/Dropdown';
 import FileInput from 'components/ui/inputs/FileInput';
 import React from 'react';
@@ -135,19 +136,19 @@ export default class AddCardForm extends React.Component<AddCardFormProps> {
             refProp={fields.thumbnailUrl.refProp}
             errors={this.state.errors.thumbnailUrl}
           />
-          <button type={'submit'}>Submit</button>
+          <Button type="submit" innerText="Add card" />
         </Form>
         {this.state.isPopupOpened && (
           <Popup>
             <p>Your data has been saved!</p>
-            <button
+            <Button
+              type="button"
+              innerText="good"
               onClick={() => {
                 this.setState({ isPopupOpened: false });
                 this.form.current?.reset();
               }}
-            >
-              Ok
-            </button>
+            />
           </Popup>
         )}
       </>
