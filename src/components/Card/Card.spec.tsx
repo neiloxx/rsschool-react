@@ -8,18 +8,21 @@ describe('Card', () => {
     id: 'id',
     title: 'Title',
     thumbnailUrl: 'thumbnailUrl',
-    authors: ['authors'],
+    authors: 'authors',
     shortDescription: 'shortDescription',
-    pageCount: 23,
+    categories: ['Data Science'],
+    language: 'English',
+    status: 'published',
   };
 
   beforeEach(() => render(<Card {...TEST_DATA} />));
 
   it('should render card', () => {
     expect(screen.getByText(TEST_DATA.title)).toBeInTheDocument();
-    expect(screen.getByText(TEST_DATA.authors[0])).toBeInTheDocument();
+    expect(screen.getByText(TEST_DATA.authors)).toBeInTheDocument();
     expect(screen.getByText(TEST_DATA.shortDescription)).toBeInTheDocument();
-    expect(screen.getByText(TEST_DATA.pageCount)).toBeInTheDocument();
+    expect(screen.getByText(TEST_DATA.language)).toBeInTheDocument();
+    expect(screen.getByText(TEST_DATA.status)).toBeInTheDocument();
   });
 
   it('should create image and fill alt attribute in it', () => {
