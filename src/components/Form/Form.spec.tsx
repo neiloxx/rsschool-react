@@ -5,7 +5,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 describe('Card', () => {
   const TEST_DATA = {
-    children: <div data-testID={'children'}>children</div>,
+    children: <div data-testid={'children'}>children</div>,
     onFormError: jest.fn(),
     onFormSuccess: jest.fn(),
     validators: {
