@@ -8,9 +8,7 @@ type CardsFieldType = {
   cards: CardType[];
 };
 
-export default function CardsField(props: CardsFieldType): JSX.Element {
-  const { cards } = props;
-
+export default function CardsField({ cards }: CardsFieldType): JSX.Element {
   return (
     <div className={'cards'}>
       {cards.map((el) => (

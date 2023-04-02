@@ -11,9 +11,13 @@ type InputProps = {
   refProp?: React.RefObject<HTMLInputElement>;
 };
 
-export default function FileInput(props: InputProps): JSX.Element {
-  const { id, label, refProp, formats, errors } = props;
-
+export default function FileInput({
+  id,
+  label,
+  refProp,
+  formats,
+  errors,
+}: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper file'}>
       <label htmlFor={id} className={'file-label'}>

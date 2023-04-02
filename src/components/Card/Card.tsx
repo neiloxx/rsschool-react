@@ -4,18 +4,16 @@ import { CardType } from 'types/types';
 
 import './Card.scss';
 
-export default function Card(props: CardType): JSX.Element {
-  const {
-    authors,
-    categories,
-    language,
-    publishedDate,
-    shortDescription,
-    status,
-    thumbnailUrl,
-    title,
-  } = props;
-
+export default function Card({
+  authors,
+  categories,
+  language,
+  publishedDate,
+  shortDescription,
+  status,
+  thumbnailUrl,
+  title,
+}: CardType): JSX.Element {
   return (
     <div className={'card'}>
       <h3 className={'card__title'}>{title}</h3>

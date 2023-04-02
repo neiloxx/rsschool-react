@@ -12,9 +12,13 @@ type InputProps = {
   refProp?: React.RefObject<HTMLInputElement>;
 };
 
-export default function RadioInput(props: InputProps): JSX.Element {
-  const { id, label, name, refProp, isChecked } = props;
-
+export default function RadioInput({
+  id,
+  label,
+  name,
+  refProp,
+  isChecked,
+}: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
       <label htmlFor={id} className={'radio-label'}>

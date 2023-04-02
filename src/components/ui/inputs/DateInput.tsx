@@ -9,9 +9,7 @@ type InputProps = {
   refProp?: React.RefObject<HTMLInputElement>;
 };
 
-export default function DateInput(props: InputProps): JSX.Element {
-  const { id, label, refProp, errors } = props;
-
+export default function DateInput({ id, label, refProp, errors }: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper date'}>
       <label htmlFor={id} className={'date-label'}>

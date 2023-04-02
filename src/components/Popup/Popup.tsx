@@ -6,9 +6,7 @@ type PopupPropsType = {
   children: React.ReactNode;
 };
 
-export default function Popup(props: PopupPropsType): JSX.Element {
-  const { children } = props;
-
+export default function Popup({ children }: PopupPropsType): JSX.Element {
   return (
     <div className={'popup-wrapper'}>
       <div className={'popup'}>{children}</div>

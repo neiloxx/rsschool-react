@@ -10,9 +10,7 @@ type InputProps = {
   refProp?: React.RefObject<HTMLInputElement>;
 };
 
-export default function Checkbox(props: InputProps): JSX.Element {
-  const { id, label, refProp, errors } = props;
-
+export default function Checkbox({ id, label, refProp, errors }: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper checkbox'}>
       <label htmlFor={id} className={'label'}>

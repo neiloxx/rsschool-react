@@ -8,9 +8,7 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export default function Button(props: ButtonProps): JSX.Element {
-  const { type, innerText, onClick } = props;
-
+export default function Button({ type, innerText, onClick }: ButtonProps): JSX.Element {
   return (
     <button className={'button'} type={type} onClick={onClick}>
       {innerText}

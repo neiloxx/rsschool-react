@@ -9,9 +9,7 @@ type DropdownProps = {
   refProp: React.RefObject<HTMLSelectElement>;
 };
 
-export default function Dropdown(props: DropdownProps): JSX.Element {
-  const { id, label, options, refProp } = props;
-
+export default function Dropdown({ id, label, options, refProp }: DropdownProps): JSX.Element {
   return (
     <div className={'dropdown'} data-testid={id}>
       <label htmlFor={id} className={'dropdown__label'}>

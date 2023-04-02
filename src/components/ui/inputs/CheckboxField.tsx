@@ -12,9 +12,7 @@ type SwitchProps = {
   refProps: React.RefObject<HTMLInputElement>[];
 };
 
-export default function CheckboxField(props: SwitchProps): JSX.Element {
-  const { id, labels, refProps, errors } = props;
-
+export default function CheckboxField({ id, labels, refProps, errors }: SwitchProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
       <p className={'field-title'}>{`${id}:`}</p>

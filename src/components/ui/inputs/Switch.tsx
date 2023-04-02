@@ -12,9 +12,7 @@ type SwitchProps = {
   refProps: React.RefObject<HTMLInputElement>[];
 };
 
-export default function Switch(props: SwitchProps): JSX.Element {
-  const { id, labels, refProps, errors } = props;
-
+export default function Switch({ id, labels, refProps, errors }: SwitchProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
       <div className={'switch'} data-testid={id}>

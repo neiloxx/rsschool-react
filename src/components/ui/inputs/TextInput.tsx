@@ -11,9 +11,13 @@ type InputProps = {
   placeholder?: string;
 };
 
-export default function TextInput(props: InputProps): JSX.Element {
-  const { id, placeholder, label, errors, refProp } = props;
-
+export default function TextInput({
+  id,
+  placeholder,
+  label,
+  errors,
+  refProp,
+}: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
       <label htmlFor={id} className={'text-input-label'}>
