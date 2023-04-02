@@ -5,7 +5,7 @@ import 'components/SearchBar/SearchBar.scss';
 const QUERY_KEY = 'query';
 
 export default function SearchBar(): JSX.Element {
-  const [query, setQuery] = useState(localStorage.getItem(QUERY_KEY) || '');
+  const [query, setQuery] = useState<string>(localStorage.getItem(QUERY_KEY) || '');
 
   useEffect(() => () => localStorage.setItem(QUERY_KEY, query), [query]);
 
