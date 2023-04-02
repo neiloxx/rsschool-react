@@ -1,36 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import 'components/SearchBar/SearchBar.scss';
 
 const QUERY_KEY = 'query';
 
-type SearchBarState = {
-  query: string;
-};
+export default function SearchBar(): JSX.Element {
+  const [query, setQuery] = useState(localStorage.getItem(QUERY_KEY) || '');
 
-export default class SearchBar extends React.Component {
-  state: SearchBarState = {
-    query: localStorage.getItem(QUERY_KEY) || '',
+  useEffect(() => () => localStorage.setItem(QUERY_KEY, query), [query]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    this.setState({ query });
-  };
-
-  componentWillUnmount() {
-    localStorage.setItem(QUERY_KEY, this.state.query);
-  }
-
-  render() {
-    return (
-      <input
-        className={'search-bar'}
-        placeholder={'Search...'}
-        aria-label={'search-bar'}
-        value={this.state.query}
-        onChange={this.handleInputChange}
-      />
-    );
-  }
+  return (
+    <input
+      className={'search-bar'}
+      placeholder={'Search...'}
+      aria-label={'search-bar'}
+      value={query}
+      onChange={handleInputChange}
+    />
+  );
 }
