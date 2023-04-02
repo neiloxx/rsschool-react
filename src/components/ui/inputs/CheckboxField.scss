@@ -1,0 +1,14 @@
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  user-select: none;
+  gap: 1rem;
+}
+
+.field-title {
+  text-transform: capitalize;
+  margin-bottom: .5rem;
+  font-weight: 600;
+  color: var(--dark-text-color);
+}
