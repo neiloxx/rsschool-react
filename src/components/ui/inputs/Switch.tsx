@@ -1,5 +1,6 @@
-import RadioInput from 'components/ui/inputs/RadioInput';
 import * as React from 'react';
+import { FieldValues } from 'react-hook-form';
+import RadioInput from 'components/ui/inputs/RadioInput';
 
 import './inputs.scss';
 import './Switch.scss';
@@ -8,11 +9,10 @@ type SwitchProps = {
   id: string;
   labels: string[];
   errors?: string[];
-  getChosen?: () => React.RefObject<HTMLInputElement>;
-  refProps: React.RefObject<HTMLInputElement>[];
+  register?: () => FieldValues;
 };
 
-export default function Switch({ id, labels, refProps, errors }: SwitchProps): JSX.Element {
+export default function Switch({ id, labels, register, errors }: SwitchProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
       <div className={'switch'} data-testid={id}>
@@ -21,9 +21,8 @@ export default function Switch({ id, labels, refProps, errors }: SwitchProps): J
             key={`${id}-${label}`}
             id={`${id}-${label}`}
             label={label}
-            name={id}
             isChecked={!idx}
-            refProp={refProps[idx]}
+            register={register}
           />
         ))}
       </div>

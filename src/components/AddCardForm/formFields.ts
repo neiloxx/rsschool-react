@@ -1,23 +1,27 @@
-import React from 'react';
+import { isDateValid, isYearValid, validateImage } from 'helpers/validators';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+
+const MAX_YEAR = new Date().getFullYear();
+const MIN_YEAR = 1900;
 
 type MultipleItemType = {
   id: string;
   labels: string[];
-  refProps: React.RefObject<HTMLInputElement>[];
+  validationRules?: RegisterOptions;
 };
 
 type SingleItemType = {
   id: string;
   label: string;
   formats?: string;
-  refProp: React.RefObject<HTMLInputElement>;
+  validationRules?: RegisterOptions;
 };
 
 type dropdownFieldsType = {
   id: string;
   label: string;
   options: string[];
-  refProp: React.RefObject<HTMLSelectElement>;
+  validationRules?: RegisterOptions;
 };
 
 type FieldsType = {
@@ -34,44 +38,69 @@ const checkBoxCategories = ['Web Development', 'Mobile', 'Machine Learning', 'Da
 const dropdownOptions = ['English', 'Russian', 'French', 'Spanish'];
 
 export const fields: FieldsType = {
-  switch: { id: 'publish-switch', labels: ['published', 'unpublished'], refProps: [] },
+  switch: { id: 'publish-switch', labels: ['published', 'unpublished'] },
   title: {
     id: 'title',
     label: 'Book Title',
-    refProp: React.createRef<HTMLInputElement>(),
+    validationRules: {
+      required: 'Title is required',
+      minLength: {
+        value: 3,
+        message: 'Title must be at least 3 characters long',
+      },
+      maxLength: {
+        value: 20,
+        message: 'Title must be at most 20 characters long',
+      },
+    },
   },
   authors: {
     id: 'authors',
     label: 'Authors',
-    refProp: React.createRef<HTMLInputElement>(),
+    validationRules: {
+      required: 'Authors is required',
+      minLength: {
+        value: 3,
+        message: 'Authors initials must be at least 3 characters long',
+      },
+      maxLength: {
+        value: 20,
+        message: 'Authors initials must be at most 20 characters long',
+      },
+    },
   },
   date: {
-    id: 'publish-date',
+    id: 'publishedDate',
     label: 'publish date',
-    refProp: React.createRef<HTMLInputElement>(),
+    validationRules: {
+      validate: {
+        isDateValid: (v) => isDateValid(v) || 'Use a valid Date',
+        isYearValid: (v) =>
+          isYearValid(v, MIN_YEAR, MAX_YEAR) || `Use year between ${MIN_YEAR} and ${MAX_YEAR}`,
+      },
+    },
   },
   checkbox: {
     id: 'categories',
     labels: checkBoxCategories,
-    refProps: [],
+    validationRules: {
+      required: 'Choose at least one category',
+    },
   },
   dropdown: {
     id: 'language',
     label: 'Book language',
     options: dropdownOptions,
-    refProp: React.createRef<HTMLSelectElement>(),
   },
   thumbnailUrl: {
-    id: 'card-image',
+    id: 'thumbnailUrl',
     label: 'Upload image',
     formats: '.jpg, .png',
-    refProp: React.createRef<HTMLInputElement>(),
+    validationRules: {
+      required: 'Add image',
+      validate: {
+        validateImage: (v) => validateImage(v) || 'Use a valid image',
+      },
+    },
   },
 };
-
-function setMultipleRefs(field: MultipleItemType): void {
-  field.labels.forEach(() => field.refProps.push(React.createRef<HTMLInputElement>()));
-}
-
-setMultipleRefs(fields.switch);
-setMultipleRefs(fields.checkbox);

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FieldValues } from 'react-hook-form';
 
 import './inputs.scss';
 import './TextInput.scss';
@@ -6,17 +7,17 @@ import './TextInput.scss';
 type InputProps = {
   id: string;
   label: string;
-  errors?: string[];
-  refProp?: React.RefObject<HTMLInputElement>;
+  errors?: string;
   placeholder?: string;
+  register?: () => FieldValues;
 };
 
 export default function TextInput({
   id,
   placeholder,
   label,
+  register,
   errors,
-  refProp,
 }: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper'}>
@@ -25,13 +26,14 @@ export default function TextInput({
         <input
           id={id}
           type={'text'}
+          name={id}
           placeholder={placeholder}
-          ref={refProp}
           className={'text-input'}
           data-testid={id}
+          {...(register && register())}
         />
       </label>
-      <p className={'field-error'}>{errors && errors.join(', ')}</p>
+      <p className={'field-error'}>{errors}</p>
     </div>
   );
 }

@@ -6,7 +6,6 @@
   cursor: pointer;
 }
 
-
 .field-wrapper .field-error {
   min-height: 1.3rem;
   font-size: 0.8rem;
@@ -47,6 +46,11 @@
       cursor: pointer;
       border-radius: 0 .4rem .4rem 0;
 
+      &:disabled {
+        background-color: #d0caca;
+        pointer-events: none;
+        cursor: default;
+      }
 
       &:focus {
         outline: none;

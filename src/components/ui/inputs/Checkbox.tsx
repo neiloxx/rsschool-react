@@ -1,27 +1,29 @@
 import * as React from 'react';
-import './Checkbox.scss';
+import { FieldValues } from 'react-hook-form';
 
+import './Checkbox.scss';
 import './inputs.scss';
 
 type InputProps = {
   id?: string;
   label?: string;
   errors?: string[];
-  refProp?: React.RefObject<HTMLInputElement>;
+  register?: () => FieldValues;
 };
 
-export default function Checkbox({ id, label, refProp, errors }: InputProps): JSX.Element {
+export default function Checkbox({ id, label, register, errors }: InputProps): JSX.Element {
   return (
     <div className={'field-wrapper checkbox'}>
       <label htmlFor={id} className={'label'}>
         <span>{label}</span>
         <input
           id={id}
+          name={id}
           type={'checkbox'}
-          ref={refProp}
           value={label}
           className={'checkbox-input'}
           data-testid={id}
+          {...(register && register())}
         />
       </label>
       {errors && <p className={'field-error'}>{errors?.join(', ')}</p>}

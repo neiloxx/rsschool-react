@@ -1,21 +1,22 @@
 import * as React from 'react';
-import './FileInput.scss';
+import { FieldValues } from 'react-hook-form';
 
+import './FileInput.scss';
 import './inputs.scss';
 
 type InputProps = {
   id?: string;
   label?: string;
   formats?: string;
-  errors?: string[];
-  refProp?: React.RefObject<HTMLInputElement>;
+  errors?: string;
+  register?: () => FieldValues;
 };
 
 export default function FileInput({
   id,
   label,
-  refProp,
   formats,
+  register,
   errors,
 }: InputProps): JSX.Element {
   return (
@@ -25,13 +26,13 @@ export default function FileInput({
         <input
           id={id}
           type={'file'}
-          ref={refProp}
           className={'file-input'}
           accept={formats}
           data-testid={id}
+          {...(register && register())}
         />
       </label>
-      <p className={'field-error'}>{errors && errors.join(', ')}</p>
+      <p className={'field-error'}>{errors}</p>
     </div>
   );
 }
