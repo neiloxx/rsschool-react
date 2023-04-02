@@ -12,26 +12,24 @@ type InputProps = {
   refProp?: React.RefObject<HTMLInputElement>;
 };
 
-export default class RadioInput extends React.Component<InputProps> {
-  render() {
-    const { id, label, name, refProp, isChecked } = this.props;
+export default function RadioInput(props: InputProps): JSX.Element {
+  const { id, label, name, refProp, isChecked } = props;
 
-    return (
-      <div className={'field-wrapper'}>
-        <label htmlFor={id} className={'radio-label'}>
-          <input
-            id={id}
-            type={'radio'}
-            name={name}
-            value={label}
-            ref={refProp}
-            className={'radio-input'}
-            defaultChecked={!!isChecked}
-            data-testid={id}
-          />
-          <span>{label}</span>
-        </label>
-      </div>
-    );
-  }
+  return (
+    <div className={'field-wrapper'}>
+      <label htmlFor={id} className={'radio-label'}>
+        <input
+          id={id}
+          type={'radio'}
+          name={name}
+          value={label}
+          ref={refProp}
+          className={'radio-input'}
+          defaultChecked={!!isChecked}
+          data-testid={id}
+        />
+        <span>{label}</span>
+      </label>
+    </div>
+  );
 }

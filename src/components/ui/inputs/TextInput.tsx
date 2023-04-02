@@ -11,25 +11,23 @@ type InputProps = {
   placeholder?: string;
 };
 
-export default class TextInput extends React.Component<InputProps> {
-  render() {
-    const { id, placeholder, label, errors, refProp } = this.props;
+export default function TextInput(props: InputProps): JSX.Element {
+  const { id, placeholder, label, errors, refProp } = props;
 
-    return (
-      <div className={'field-wrapper'}>
-        <label htmlFor={id} className={'text-input-label'}>
-          <span>{label}</span>
-          <input
-            id={id}
-            type={'text'}
-            placeholder={placeholder}
-            ref={refProp}
-            className={'text-input'}
-            data-testid={id}
-          />
-        </label>
-        <p className={'field-error'}>{errors && errors.join(', ')}</p>
-      </div>
-    );
-  }
+  return (
+    <div className={'field-wrapper'}>
+      <label htmlFor={id} className={'text-input-label'}>
+        <span>{label}</span>
+        <input
+          id={id}
+          type={'text'}
+          placeholder={placeholder}
+          ref={refProp}
+          className={'text-input'}
+          data-testid={id}
+        />
+      </label>
+      <p className={'field-error'}>{errors && errors.join(', ')}</p>
+    </div>
+  );
 }

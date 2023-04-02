@@ -12,26 +12,24 @@ type SwitchProps = {
   refProps: React.RefObject<HTMLInputElement>[];
 };
 
-export default class Switch extends React.Component<SwitchProps> {
-  render() {
-    const { id, labels, refProps, errors } = this.props;
+export default function Switch(props: SwitchProps): JSX.Element {
+  const { id, labels, refProps, errors } = props;
 
-    return (
-      <div className={'field-wrapper'}>
-        <div className={'switch'} data-testid={id}>
-          {labels.map((label, idx) => (
-            <RadioInput
-              key={`${id}-${label}`}
-              id={`${id}-${label}`}
-              label={label}
-              name={id}
-              isChecked={!idx}
-              refProp={refProps[idx]}
-            />
-          ))}
-        </div>
-        <p className={'field-error'}>{errors && errors.join(', ')}</p>
+  return (
+    <div className={'field-wrapper'}>
+      <div className={'switch'} data-testid={id}>
+        {labels.map((label, idx) => (
+          <RadioInput
+            key={`${id}-${label}`}
+            id={`${id}-${label}`}
+            label={label}
+            name={id}
+            isChecked={!idx}
+            refProp={refProps[idx]}
+          />
+        ))}
       </div>
-    );
-  }
+      <p className={'field-error'}>{errors && errors.join(', ')}</p>
+    </div>
+  );
 }
