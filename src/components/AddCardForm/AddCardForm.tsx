@@ -1,15 +1,17 @@
-import Popup from 'components/Popup/Popup';
-import Button from 'components/ui/buttons/Button';
-import Dropdown from 'components/ui/dropdown/Dropdown';
-import FileInput from 'components/ui/inputs/FileInput';
 import React, { useState } from 'react';
+import Popup from 'components/Popup/Popup';
 import generateId from 'utils/generateId';
 
 import Form from 'components/Form/Form';
-import Switch from 'components/ui/inputs/Switch';
-import TextInput from 'components/ui/inputs/TextInput';
-import CheckboxField from 'components/ui/inputs/CheckboxField';
-import DateInput from 'components/ui/inputs/DateInput';
+import {
+  Switch,
+  CheckboxField,
+  TextInput,
+  DateInput,
+  FileInput,
+  Dropdown,
+  Button,
+} from 'components/ui/index';
 
 import { CardType, FormErrorsType } from 'types/types';
 import {
