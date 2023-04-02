@@ -9,46 +9,39 @@ type FormProps = {
   validators?: { [x: string]: () => string[] };
 };
 
-export default class Form extends React.Component<FormProps> {
-  validators = {
-    ...this.props.validators,
-  };
+export default function Form({
+  children,
+  onFormError,
+  onFormSuccess,
+  validators,
+  refProp,
+}: FormProps): JSX.Element {
+  const errors: FormErrorsType = {};
 
-  errors: FormErrorsType = {};
-
-  validate = (): void => {
-    for (const validator in this.validators) {
-      this.errors[validator] = this.validators[validator]();
+  const validate = (): void => {
+    for (const validator in validators) {
+      errors[validator] = validators[validator]();
     }
   };
 
-  isFormValid = (): boolean => {
-    for (const error in this.errors) {
-      if (this.errors[error].length) {
+  const isFormValid = (): boolean => {
+    for (const error in errors) {
+      if (errors[error].length) {
         return false;
       }
     }
     return true;
   };
 
-  handleSubmit = (event: React.FormEvent): void => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    this.validate();
-    this.isFormValid() ? this.props.onFormSuccess() : this.props.onFormError(this.errors);
+    validate();
+    isFormValid() ? onFormSuccess() : onFormError(errors);
   };
 
-  render() {
-    const { children, refProp } = this.props;
-
-    return (
-      <form
-        className={'form'}
-        ref={refProp}
-        role="form"
-        onSubmit={(event) => this.handleSubmit(event)}
-      >
-        <div className={'form-inner'}>{children}</div>
-      </form>
-    );
-  }
+  return (
+    <form className={'form'} ref={refProp} role="form" onSubmit={(event) => handleSubmit(event)}>
+      <div className={'form-inner'}>{children}</div>
+    </form>
+  );
 }
