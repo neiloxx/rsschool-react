@@ -1,35 +1,38 @@
 import * as React from 'react';
+import { FieldValues } from 'react-hook-form';
 
-import './inputs.scss';
 import './FileInput.scss';
+import './inputs.scss';
 
 type InputProps = {
   id?: string;
   label?: string;
   formats?: string;
-  errors?: string[];
-  refProp?: React.RefObject<HTMLInputElement>;
+  errors?: string;
+  register?: () => FieldValues;
 };
 
-export default class FileInput extends React.Component<InputProps> {
-  render() {
-    const { id, label, refProp, formats, errors } = this.props;
-
-    return (
-      <div className={'field-wrapper file'}>
-        <label htmlFor={id} className={'file-label'}>
-          <span>{label}</span>
-          <input
-            id={id}
-            type={'file'}
-            ref={refProp}
-            className={'file-input'}
-            accept={formats}
-            data-testid={id}
-          />
-        </label>
-        <p className={'field-error'}>{errors && errors.join(', ')}</p>
-      </div>
-    );
-  }
+export default function FileInput({
+  id,
+  label,
+  formats,
+  register,
+  errors,
+}: InputProps): JSX.Element {
+  return (
+    <div className={'field-wrapper file'}>
+      <label htmlFor={id} className={'file-label'}>
+        <span>{label}</span>
+        <input
+          id={id}
+          type={'file'}
+          className={'file-input'}
+          accept={formats}
+          data-testid={id}
+          {...(register && register())}
+        />
+      </label>
+      <p className={'field-error'}>{errors}</p>
+    </div>
+  );
 }

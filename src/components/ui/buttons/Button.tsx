@@ -8,14 +8,10 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export default class Button extends React.Component<ButtonProps> {
-  render() {
-    const { type, innerText, onClick } = this.props;
-
-    return (
-      <button className={'button'} type={type} onClick={onClick}>
-        {innerText}
-      </button>
-    );
-  }
+export function Button({ type, innerText, onClick }: ButtonProps): JSX.Element {
+  return (
+    <button className={'button'} type={type} onClick={onClick}>
+      {innerText}
+    </button>
+  );
 }

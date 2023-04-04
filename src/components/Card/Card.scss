@@ -48,4 +48,7 @@
 .image {
   max-width: 10rem;
   width: 100%;
+  height: 200px;
+  object-fit: contain;
+  object-position: center;
 }

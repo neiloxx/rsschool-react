@@ -1,36 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import 'components/SearchBar/SearchBar.scss';
 
 const QUERY_KEY = 'query';
 
-type SearchBarState = {
-  query: string;
-};
+export default function SearchBar(): JSX.Element {
+  const [query, setQuery] = useState<string>(localStorage.getItem(QUERY_KEY) || '');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export default class SearchBar extends React.Component {
-  state: SearchBarState = {
-    query: localStorage.getItem(QUERY_KEY) || '',
+  useEffect(() => {
+    const queryToSave = { ...inputRef };
+    return () => localStorage.setItem(QUERY_KEY, queryToSave.current?.value || '');
+  }, []);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    this.setState({ query });
-  };
-
-  componentWillUnmount() {
-    localStorage.setItem(QUERY_KEY, this.state.query);
-  }
-
-  render() {
-    return (
-      <input
-        className={'search-bar'}
-        placeholder={'Search...'}
-        aria-label={'search-bar'}
-        value={this.state.query}
-        onChange={this.handleInputChange}
-      />
-    );
-  }
+  return (
+    <input
+      className={'search-bar'}
+      placeholder={'Search...'}
+      aria-label={'search-bar'}
+      value={query}
+      ref={inputRef}
+      onChange={handleInputChange}
+    />
+  );
 }

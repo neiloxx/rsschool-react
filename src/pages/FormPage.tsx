@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardsField from 'components/CardsField/CardsField';
 import AddCardForm from 'components/AddCardForm/AddCardForm';
 import { CardType } from 'types/types';
 
-export default class FormPage extends React.Component {
-  state = {
-    cards: [],
+export default function FormPage(): JSX.Element {
+  const [cards, setCards] = useState<CardType[]>([]);
+
+  const addCard = (card: CardType) => {
+    setCards([...cards, card]);
   };
 
-  addCard = (card: CardType) => {
-    this.setState({ cards: [...this.state.cards, card] });
-  };
-
-  render() {
-    return (
-      <>
-        <h1>Form Page</h1>
-        <AddCardForm {...this.props} addCard={this.addCard} />
-        <CardsField cards={this.state.cards} />
-      </>
-    );
-  }
+  return (
+    <>
+      <h1>Form Page</h1>
+      <AddCardForm addCard={addCard} />
+      <CardsField cards={cards} />
+    </>
+  );
 }

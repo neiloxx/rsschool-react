@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FieldValues } from 'react-hook-form';
 
 import './inputs.scss';
 import './TextInput.scss';
@@ -6,30 +7,33 @@ import './TextInput.scss';
 type InputProps = {
   id: string;
   label: string;
-  errors?: string[];
-  refProp?: React.RefObject<HTMLInputElement>;
+  errors?: string;
   placeholder?: string;
+  register?: () => FieldValues;
 };
 
-export default class TextInput extends React.Component<InputProps> {
-  render() {
-    const { id, placeholder, label, errors, refProp } = this.props;
-
-    return (
-      <div className={'field-wrapper'}>
-        <label htmlFor={id} className={'text-input-label'}>
-          <span>{label}</span>
-          <input
-            id={id}
-            type={'text'}
-            placeholder={placeholder}
-            ref={refProp}
-            className={'text-input'}
-            data-testid={id}
-          />
-        </label>
-        <p className={'field-error'}>{errors && errors.join(', ')}</p>
-      </div>
-    );
-  }
+export default function TextInput({
+  id,
+  placeholder,
+  label,
+  register,
+  errors,
+}: InputProps): JSX.Element {
+  return (
+    <div className={'field-wrapper'}>
+      <label htmlFor={id} className={'text-input-label'}>
+        <span>{label}</span>
+        <input
+          id={id}
+          type={'text'}
+          name={id}
+          placeholder={placeholder}
+          className={'text-input'}
+          data-testid={id}
+          {...(register && register())}
+        />
+      </label>
+      <p className={'field-error'}>{errors}</p>
+    </div>
+  );
 }

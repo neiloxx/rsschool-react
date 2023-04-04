@@ -1,24 +1,21 @@
-import Popup from 'components/Popup/Popup';
-import Button from 'components/ui/buttons/Button';
-import Dropdown from 'components/ui/dropdown/Dropdown';
-import FileInput from 'components/ui/inputs/FileInput';
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import generateId from 'utils/generateId';
 
+import Popup from 'components/Popup/Popup';
 import Form from 'components/Form/Form';
-import Switch from 'components/ui/inputs/Switch';
-import TextInput from 'components/ui/inputs/TextInput';
-import CheckboxField from 'components/ui/inputs/CheckboxField';
-import DateInput from 'components/ui/inputs/DateInput';
-
-import { CardType, FormErrorsType } from 'types/types';
 import {
-  validateAuthors,
-  validateCategories,
-  validateImage,
-  validatePublishDate,
-  validateTitle,
-} from 'helpers/validators';
+  Switch,
+  CheckboxField,
+  TextInput,
+  DateInput,
+  FileInput,
+  Dropdown,
+  Button,
+} from 'components/ui/index';
+import { CardType, FormCardType } from 'types/types';
+
 import { fields } from './formFields';
 
 import './AddCardForm.scss';
@@ -27,131 +24,107 @@ type AddCardFormProps = {
   addCard: (card: CardType) => void;
 };
 
-type FormState = {
-  errors: { [x: string]: string[] };
-  isPopupOpened: boolean;
-};
+export default function AddCardForm({ addCard }: AddCardFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset,
+  } = useForm<FormCardType>();
 
-export default class AddCardForm extends React.Component<AddCardFormProps> {
-  form: React.RefObject<HTMLFormElement> = React.createRef();
-  validators = {
-    authors: () => validateAuthors(fields.authors.refProp.current!.value),
-    title: () => validateTitle(fields.title.refProp.current!.value),
-    date: () =>
-      validatePublishDate(
-        `${fields.date.refProp.current!.value}`,
-        this.getCheckedValue(fields.switch.refProps).join('')
-      ),
-    categories: () => validateCategories(this.getCheckedValue(fields.checkbox.refProps)),
-    thumbnailUrl: () => validateImage(fields.thumbnailUrl.refProp.current?.files),
-  };
+  const [isPopupOpened, setPopupOpened] = useState<boolean>(false);
+  const status = watch('status');
 
-  state: FormState = {
-    errors: {},
-    isPopupOpened: false,
-  };
-
-  getCheckedValue = (refProps: React.RefObject<HTMLInputElement>[]): string[] => {
-    const checkedRefs = refProps.filter((el) => el.current?.checked);
-    return checkedRefs.map((el) => el.current!.value);
-  };
-
-  getImageUrl = () => {
-    const files = fields.thumbnailUrl.refProp.current?.files;
-    const file = files && files[0];
-    return file ? URL.createObjectURL(file) : undefined;
-  };
-
-  getValues = (): CardType => {
-    return {
-      authors: fields.authors.refProp.current!.value,
-      categories: this.getCheckedValue(fields.checkbox.refProps),
+  const onSubmit = ({
+    authors,
+    title,
+    thumbnailUrl,
+    publishedDate,
+    categories,
+    status,
+    language,
+  }: FormCardType) => {
+    const file = thumbnailUrl ? thumbnailUrl[0] : undefined;
+    const imageURL = file ? URL.createObjectURL(file) : undefined;
+    addCard({
       id: generateId(),
-      language: fields.dropdown.refProp.current!.value,
-      publishedDate: fields.date.refProp.current?.value,
-      status: this.getCheckedValue(fields.switch.refProps).join(''),
-      thumbnailUrl: this.getImageUrl(),
-      title: fields.title.refProp.current!.value,
-    };
+      authors,
+      title,
+      publishedDate,
+      categories,
+      status,
+      language,
+      thumbnailUrl: imageURL,
+    });
+    setPopupOpened(true);
   };
 
-  onFormError = (errors: FormErrorsType) => {
-    this.setState({ errors: { ...errors } });
-  };
-
-  onFormSuccess = () => {
-    this.props.addCard(this.getValues());
-    this.setState({ errors: {} });
-    this.setState({ isPopupOpened: true });
-  };
-
-  render() {
-    return (
-      <>
-        <Form
-          refProp={this.form}
-          onFormError={this.onFormError}
-          onFormSuccess={this.onFormSuccess}
-          validators={this.validators}
-        >
-          <TextInput
-            id={fields.title.id}
-            label={fields.title.label}
-            refProp={fields.title.refProp}
-            errors={this.state.errors.title}
+  return (
+    <>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <TextInput
+          id={fields.title.id}
+          label={fields.title.label}
+          errors={errors.title?.message}
+          register={() => register('title', fields.title.validationRules)}
+        />
+        <TextInput
+          id={fields.authors.id}
+          label={fields.authors.label}
+          errors={errors.authors?.message}
+          register={() => register('authors', fields.authors.validationRules)}
+        />
+        <Switch
+          id={fields.switch.id}
+          labels={fields.switch.labels}
+          register={() => register('status')}
+        />
+        <DateInput
+          id={fields.date.id}
+          label={fields.date.label}
+          errors={status === 'published' ? errors.publishedDate?.message : undefined}
+          register={() =>
+            register('publishedDate', {
+              disabled: status === 'unpublished',
+              ...fields.date.validationRules,
+            })
+          }
+        />
+        <CheckboxField
+          id={fields.checkbox.id}
+          labels={fields.checkbox.labels}
+          errors={errors.categories?.message}
+          register={() => register('categories', fields.checkbox.validationRules)}
+        />
+        <Dropdown
+          id={fields.dropdown.id}
+          label={fields.dropdown.label}
+          options={fields.dropdown.options}
+          register={() => register('language', { required: true })}
+        />
+        <FileInput
+          id={fields.thumbnailUrl.id}
+          label={fields.thumbnailUrl.label}
+          formats={fields.thumbnailUrl.formats}
+          errors={errors.thumbnailUrl?.message}
+          register={() => register('thumbnailUrl', fields.thumbnailUrl.validationRules)}
+        />
+        <Button type="submit" innerText="Add card" />
+      </Form>
+      {isPopupOpened && (
+        <Popup>
+          <p>Your data has been saved!</p>
+          <Button
+            type="button"
+            innerText="good"
+            onClick={() => {
+              setPopupOpened(false);
+              reset();
+            }}
           />
-          <TextInput
-            id={fields.authors.id}
-            label={fields.authors.label}
-            refProp={fields.authors.refProp}
-            errors={this.state.errors.authors}
-          />
-          <Switch
-            id={fields.switch.id}
-            labels={fields.switch.labels}
-            refProps={fields.switch.refProps}
-          />
-          <DateInput
-            id={fields.date.id}
-            label={fields.date.label}
-            refProp={fields.date.refProp}
-            errors={this.state.errors.date}
-          />
-          <CheckboxField
-            id={fields.checkbox.id}
-            labels={fields.checkbox.labels}
-            refProps={fields.checkbox.refProps}
-            errors={this.state.errors.categories}
-          />
-          <Dropdown
-            id={fields.dropdown.id}
-            label={fields.dropdown.label}
-            options={fields.dropdown.options}
-            refProp={fields.dropdown.refProp}
-          />
-          <FileInput
-            id={fields.thumbnailUrl.id}
-            label={fields.thumbnailUrl.label}
-            formats={fields.thumbnailUrl.formats}
-            refProp={fields.thumbnailUrl.refProp}
-            errors={this.state.errors.thumbnailUrl}
-          />
-          <Button type="submit" innerText="Add card" />
-        </Form>
-        {this.state.isPopupOpened && (
-          <Popup>
-            <p>Your data has been saved!</p>
-            <Button
-              type="button"
-              innerText="good"
-              onClick={() => {
-                this.setState({ isPopupOpened: false });
-                this.form.current?.reset();
-              }}
-            />
-          </Popup>
-        )}
-      </>
-    );
-  }
+        </Popup>
+      )}
+    </>
+  );
 }
