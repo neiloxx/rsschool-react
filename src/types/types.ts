@@ -23,3 +23,11 @@ export type FormCardType = {
   thumbnailUrl: FileList;
   title: string;
 };
+
+export type CharacterCardType = {
+  id: string;
+  name: string;
+  status: string;
+  species: string;
+  image: string;
+};
