@@ -10,3 +10,29 @@
   font-size: 1rem;
   padding: 1rem;
 }
+
+.search-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.search-button {
+  background-color: var(--dark-text-color);
+  outline: none;
+  border: none;
+  border-radius: .5rem;
+  margin-left: .5rem;
+  width: 5rem;
+  transition: background-color .2s ease-in;
+
+  &:hover {
+    background-color: var(--secondary-bg-color);
+    color: var(--dark-text-color);
+  }
+
+  &:active {
+    background-color: var(--dark-text-color);
+    color: #F9F7F7;
+  }
+}

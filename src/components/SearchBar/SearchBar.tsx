@@ -1,30 +1,41 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import 'components/SearchBar/SearchBar.scss';
 
-const QUERY_KEY = 'query';
+type SearchBarType = {
+  inputRef: React.RefObject<HTMLInputElement>;
+  onSearch: (query: string) => void;
+  query: string;
+};
 
-export default function SearchBar(): JSX.Element {
-  const [query, setQuery] = useState<string>(localStorage.getItem(QUERY_KEY) || '');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const queryToSave = { ...inputRef };
-    return () => localStorage.setItem(QUERY_KEY, queryToSave.current?.value || '');
-  }, []);
+export default function SearchBar({ inputRef, onSearch, query }: SearchBarType): JSX.Element {
+  const [searchQuery, setQuery] = useState<string>(query);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
+  const handleSearch = () => onSearch(searchQuery);
+
+  const handlePressEnter = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
-    <input
-      className={'search-bar'}
-      placeholder={'Search...'}
-      aria-label={'search-bar'}
-      value={query}
-      ref={inputRef}
-      onChange={handleInputChange}
-    />
+    <div className={'search-wrapper'} onKeyDown={handlePressEnter}>
+      <input
+        className={'search-bar'}
+        placeholder={'Search...'}
+        aria-label={'search-bar'}
+        value={searchQuery}
+        ref={inputRef}
+        onChange={handleInputChange}
+      />
+      <button className={'search-button'} onClick={handleSearch}>
+        Search
+      </button>
+    </div>
   );
 }
