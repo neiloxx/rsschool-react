@@ -39,7 +39,7 @@ export default function CharacterCard({
         </div>
       </div>
       {isPopupOpened && (
-        <Popup onBackgroundCLick={() => setPopupOpened(false)}>
+        <Popup onClose={() => setPopupOpened(false)}>
           {isLoading ? <p>Progressing...</p> : <CardDetails {...cardDetails} />}
         </Popup>
       )}

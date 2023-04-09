@@ -28,3 +28,10 @@
   cursor: default;
   z-index: 999;
 }
+
+.popup-closer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
+}
