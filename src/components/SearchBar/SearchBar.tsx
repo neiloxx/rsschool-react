@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'components/SearchBar/SearchBar.scss';
 
 type SearchBarType = {
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement>;
   onSearch: (query: string) => void;
   query: string;
 };

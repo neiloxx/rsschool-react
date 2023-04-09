@@ -6,7 +6,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 describe('SearchBar', () => {
   const query = 'query';
 
-  beforeEach(() => render(<SearchBar />));
+  beforeEach(() => render(<SearchBar onSearch={jest.fn} query={''} />));
 
   it('should render SearchBar', () => {
     expect(screen.getByLabelText('search-bar'));

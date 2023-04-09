@@ -20,10 +20,15 @@ export default function CharacterCard({
   const onCardClick = () => {
     setIsLoading(true);
     id &&
-      getCharacter(id).then((card) => {
-        setCardDetails(card);
-        setIsLoading(false);
-      });
+      getCharacter(id)
+        .then((card) => {
+          setCardDetails(card);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setCardDetails(null);
+          setIsLoading(false);
+        });
     setPopupOpened(true);
   };
 
