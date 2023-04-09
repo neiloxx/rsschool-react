@@ -62,7 +62,9 @@ describe('HomePage', () => {
   it('should render Progressing... when waits for cards', async () => {
     mockedAxios.get.mockRejectedValueOnce({});
     render(<HomePage />, { wrapper: BrowserRouter });
-    expect(screen.queryByText('Progressing...')).toBeInTheDocument();
-    expect(mockedAxios.get).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(screen.queryByText('Progressing...')).toBeInTheDocument();
+      expect(mockedAxios.get).toHaveBeenCalled();
+    });
   });
 });
