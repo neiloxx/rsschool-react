@@ -9,9 +9,11 @@
   left: 0;
   background-color: rgba(46, 51, 54, 0.5);
   z-index: 50;
+  cursor: pointer;
 }
 
 .popup {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,4 +25,13 @@
   background-color: var(--base-bg-color);
   opacity: 100;
   gap: 1rem;
+  cursor: default;
+  z-index: 999;
+}
+
+.popup-closer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
 }
