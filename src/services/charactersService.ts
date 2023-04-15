@@ -16,5 +16,10 @@ export const charactersAPI = createApi({
       }),
       transformResponse: (response: { results: CharacterCardType[] }) => response.results,
     }),
+    fetchCharacterById: build.query<CharacterCardType, string>({
+      query: (id) => ({
+        url: `/character/${id}`,
+      }),
+    }),
   }),
 });
