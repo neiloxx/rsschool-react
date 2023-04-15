@@ -12,7 +12,7 @@ export default function CardDetails({ id }: CardDetailsType): JSX.Element {
     data: character,
     isFetching,
     isError,
-  } = charactersAPI.useFetchCharacterByIdQuery(id || '');
+  } = charactersAPI.useFetchCharacterByIdQuery(`${id}`);
 
   return (
     <div className={'card-details'}>

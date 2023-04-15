@@ -25,12 +25,12 @@ export type FormCardType = {
 };
 
 export type CharacterCardType = {
-  id?: string;
+  id?: string | number;
   name?: string;
   status?: string;
   species?: string;
   image?: string;
   episode?: string[];
   gender?: string;
-  location?: { name: string };
+  location?: { name: string; url: string };
 };
