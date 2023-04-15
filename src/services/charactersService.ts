@@ -23,3 +23,17 @@ export const charactersAPI = createApi({
     }),
   }),
 });
+
+export type CharactersApiSuccess<T> = {
+  info: {
+    count: number;
+    page: number;
+    next: string;
+    prev: string | null;
+  };
+  results: T[];
+};
+
+export type CharactersApiError = {
+  error: string;
+};

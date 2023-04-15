@@ -32,5 +32,9 @@ export type CharacterCardType = {
   image?: string;
   episode?: string[];
   gender?: string;
+  type?: string;
+  origin?: { name: string; url: string };
   location?: { name: string; url: string };
+  url?: string;
+  created?: string;
 };
