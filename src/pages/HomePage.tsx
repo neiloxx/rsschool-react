@@ -1,14 +1,11 @@
 import CharacterCard from 'components/CharacterCard/CharacterCard';
 import SearchBar from 'components/SearchBar/SearchBar';
-import React, { useRef, useState } from 'react';
+import { useAppSelector } from 'hooks/redux';
+import React from 'react';
 import { charactersAPI } from 'services/charactersService';
 
-const QUERY_KEY = 'query';
-
 export default function HomePage(): JSX.Element {
-  const [query, setQuery] = useState<string>(localStorage.getItem(QUERY_KEY) || '');
-  const inputRef = useRef<HTMLInputElement>(null);
-
+  const query = useAppSelector((state) => state.searchBarSlice.query);
   const { data, isFetching, isError } = charactersAPI.useFetchCharactersQuery(query);
 
   const characters = data || [];
@@ -16,7 +13,7 @@ export default function HomePage(): JSX.Element {
   return (
     <>
       <h1>Home Page</h1>
-      <SearchBar query={query} inputRef={inputRef} onSearch={setQuery} />
+      <SearchBar />
       <div className="cards">
         {isError ? (
           <p>Nothing found</p>

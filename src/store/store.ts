@@ -1,9 +1,11 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
 import { charactersAPI } from 'services/charactersService';
-import formCardReducer from './reducers/formCardSlice';
+import searchBarSlice from 'store/reducers/searchBarSlice';
+import formCardReducer from 'store/reducers/formCardSlice';
 
 const rootReducer = combineReducers({
   formCardReducer,
+  searchBarSlice,
   [charactersAPI.reducerPath]: charactersAPI.reducer,
 });
 

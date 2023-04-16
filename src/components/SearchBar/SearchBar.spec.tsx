@@ -1,12 +1,13 @@
 import '@testing-library/jest-dom';
 import SearchBar from 'components/SearchBar/SearchBar';
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithProviders } from 'utils/test-utils';
 
 describe('SearchBar', () => {
   const query = 'query';
 
-  beforeEach(() => render(<SearchBar onSearch={jest.fn} query={''} />));
+  beforeEach(() => renderWithProviders(<SearchBar />));
 
   it('should render SearchBar', () => {
     expect(screen.getByLabelText('search-bar'));
