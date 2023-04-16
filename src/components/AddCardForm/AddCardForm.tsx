@@ -1,5 +1,7 @@
+import { useAppDispatch } from 'hooks/redux';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { formCardsSlice } from 'store/reducers/formCardSlice';
 
 import generateId from 'utils/generateId';
 
@@ -14,17 +16,13 @@ import {
   Dropdown,
   Button,
 } from 'components/ui/index';
-import { CardType, FormCardType } from 'types/types';
+import { FormCardType } from 'types/types';
 
 import { fields } from './formFields';
 
 import './AddCardForm.scss';
 
-type AddCardFormProps = {
-  addCard: (card: CardType) => void;
-};
-
-export default function AddCardForm({ addCard }: AddCardFormProps) {
+export default function AddCardForm() {
   const {
     register,
     handleSubmit,
@@ -36,6 +34,9 @@ export default function AddCardForm({ addCard }: AddCardFormProps) {
   const [isPopupOpened, setPopupOpened] = useState<boolean>(false);
   const status = watch('status');
 
+  const { addCard } = formCardsSlice.actions;
+  const dispatch = useAppDispatch();
+
   const onSubmit = ({
     authors,
     title,
@@ -45,18 +46,18 @@ export default function AddCardForm({ addCard }: AddCardFormProps) {
     status,
     language,
   }: FormCardType) => {
-    const file = thumbnailUrl ? thumbnailUrl[0] : undefined;
-    const imageURL = file ? URL.createObjectURL(file) : undefined;
-    addCard({
-      id: generateId(),
-      authors,
-      title,
-      publishedDate,
-      categories,
-      status,
-      language,
-      thumbnailUrl: imageURL,
-    });
+    dispatch(
+      addCard({
+        id: generateId(),
+        authors,
+        title,
+        publishedDate,
+        categories,
+        status,
+        language,
+        thumbnailUrl: URL.createObjectURL(thumbnailUrl[0]),
+      })
+    );
     setPopupOpened(true);
   };
 

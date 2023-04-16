@@ -1,21 +1,21 @@
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import React, { useState } from 'react';
 
 import 'components/SearchBar/SearchBar.scss';
+import { searchBarSlice } from 'store/reducers/searchBarSlice';
 
-type SearchBarType = {
-  inputRef?: React.RefObject<HTMLInputElement>;
-  onSearch: (query: string) => void;
-  query: string;
-};
+export default function SearchBar(): JSX.Element {
+  const query = useAppSelector((state) => state.searchBarSlice.query);
+  const [searchQuery, setSearchQuery] = useState<string>(query);
 
-export default function SearchBar({ inputRef, onSearch, query }: SearchBarType): JSX.Element {
-  const [searchQuery, setQuery] = useState<string>(query);
+  const { setQuery } = searchBarSlice.actions;
+  const dispatch = useAppDispatch();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    setSearchQuery(event.target.value);
   };
 
-  const handleSearch = () => onSearch(searchQuery);
+  const handleSearch = () => dispatch(setQuery(searchQuery));
 
   const handlePressEnter = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
@@ -30,7 +30,6 @@ export default function SearchBar({ inputRef, onSearch, query }: SearchBarType):
         placeholder={'Search...'}
         aria-label={'search-bar'}
         value={searchQuery}
-        ref={inputRef}
         onChange={handleInputChange}
       />
       <button className={'search-button'} onClick={handleSearch}>

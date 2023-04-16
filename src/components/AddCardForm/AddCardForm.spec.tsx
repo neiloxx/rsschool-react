@@ -2,16 +2,14 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import AddCardForm from 'components/AddCardForm/AddCardForm';
 import { fields } from 'components/AddCardForm/formFields';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { renderWithProviders } from 'utils/test-utils';
 
 describe('Card', () => {
   const TEST_DATA = fields;
 
-  const addCard = jest.fn();
-
-  beforeEach(() => render(<AddCardForm addCard={addCard} />));
-
   it('should render form fields', () => {
+    renderWithProviders(<AddCardForm />);
     for (const value of Object.values(TEST_DATA)) {
       expect(screen.getByTestId(value.id)).toBeInTheDocument();
     }

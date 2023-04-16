@@ -16,5 +16,6 @@ module.exports = {
     '!**/pages/index.tsx',
   ],
   modulePaths: [compilerOptions.baseUrl],
+  setupFilesAfterEnv: ['@testing-library/jest-dom', '<rootDir>/src/setupTests.ts'],
   verbose: true,
 };

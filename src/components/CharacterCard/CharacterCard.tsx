@@ -1,4 +1,3 @@
-import { getCharacter } from 'api/api';
 import CardDetails from 'components/CharacterCard/CardDetails/CardDetails';
 import Popup from 'components/Popup/Popup';
 import React, { useState } from 'react';
@@ -14,21 +13,8 @@ export default function CharacterCard({
   image,
 }: CharacterCardType): JSX.Element {
   const [isPopupOpened, setPopupOpened] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [cardDetails, setCardDetails] = useState<CharacterCardType | null>(null);
 
   const onCardClick = () => {
-    setIsLoading(true);
-    id &&
-      getCharacter(id)
-        .then((card) => {
-          setCardDetails(card);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setCardDetails(null);
-          setIsLoading(false);
-        });
     setPopupOpened(true);
   };
 
@@ -45,7 +31,7 @@ export default function CharacterCard({
       </div>
       {isPopupOpened && (
         <Popup onClose={() => setPopupOpened(false)}>
-          {isLoading ? <p>Progressing...</p> : <CardDetails {...cardDetails} />}
+          <CardDetails id={id} />
         </Popup>
       )}
     </>
